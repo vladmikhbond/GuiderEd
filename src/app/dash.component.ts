@@ -5,11 +5,11 @@ const SCALE_FACTOR = 1.2;
 /*******************************************************************************
  *
  * Output Events
- * onScaleChanged()   : scale
- * onFloorChanged()   : 0,1,2,3,4,5
- * onModeChanged()    : horPoints, verPoints, ladders, eidges, tags
+ * onScaleChanged()   event: scale
+ * onFloorChanged()   event: 0,1,2,3,4,5
+ * onModeChanged()    event: horPoints, verPoints, ladders, edges, tags
  *
- * Privat Properties:
+ * Private Properties:
  * scale: number
  *
 ********************************************************************************/
@@ -24,6 +24,10 @@ const SCALE_FACTOR = 1.2;
             height: 50px;
             background-color: darkorange;
             margin: 0;
+        }
+        #mode {
+            font-size: 28px;
+            margin-left: 20px;
         }
         mat-form-field {
             width: 50px;
@@ -51,12 +55,14 @@ const SCALE_FACTOR = 1.2;
 
             <button mat-stroked-button (click)="scaleChange(true)">+</button>
             <button mat-stroked-button (click)="scaleChange(false)">-</button>
+            <span id="mode">mode: {{mode}}</span>
         </div>`
 
 })
-export class EditorDashComponent {
+export class DashComponent {
 
     scale = 1;
+    mode = 'x';
 
     @Output() onScaleChanged = new EventEmitter<number>();
     scaleChange(increased: boolean) {

@@ -5,14 +5,14 @@ import {MatButtonModule, MatSelectModule} from '@angular/material';
  
 import {AppComponent}   from './app.component';
 import {EditorComponent} from "./editor.component";
-import {EditorDashComponent} from "./editorDash.component";
+import {DashComponent} from "./dash.component";
 
 import {EditorService} from './data/editor.service';
 
 
 @NgModule({
     imports: [BrowserModule, BrowserAnimationsModule, MatButtonModule, MatSelectModule],
-    declarations: [AppComponent, EditorComponent, EditorDashComponent],
+    declarations: [AppComponent, EditorComponent, DashComponent],
     providers: [EditorService],
     bootstrap: [AppComponent]
 })

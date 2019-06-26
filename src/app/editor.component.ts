@@ -1,6 +1,7 @@
-﻿import {Component} from '@angular/core';
+﻿import {Component,  ViewChild} from '@angular/core';
 import {Point} from './data/point';
 import {EditorService} from "./data/editor.service";
+import {DashComponent} from './dash.component';
 
 const DASH_HEIGHT = 50;
 const INFO_HEIGHT = 30;
@@ -39,6 +40,9 @@ const INFO_HEIGHT = 30;
 })
 export class EditorComponent {
 
+    @ViewChild(DashComponent, {static: false})
+    dash: DashComponent;
+
     // privates
     bgImages: HTMLImageElement[];
     scrollBox: HTMLElement;
@@ -48,10 +52,11 @@ export class EditorComponent {
     info: string = "";
     scaleField = 1;
     currentFloorIndex = 0;
-    serv: EditorService;
+    service: EditorService;
+    private mode: string;
 
     constructor(editorService: EditorService){
-        this.serv = editorService;
+        this.service = editorService;
     }
 
 
@@ -86,17 +91,17 @@ export class EditorComponent {
         // draw points
         this.ctx.lineWidth = 0.5;
 
-        for (let p of this.serv.points.filter(p => p.z == this.currentFloorIndex )) {
+        for (let p of this.service.points.filter(p => p.z == this.currentFloorIndex )) {
             this.ctx.fillRect(p.x * k - 0.5, p.y * k - 0.5, 1, 1 );
             this.ctx.strokeRect((p.x - 1) * k, (p.y - 1) * k, 2 * k, 2 * k );
         }
         // draw selected point
-        if (this.serv.selPoint && this.serv.selPoint.z == this.currentFloorIndex) {
+        if (this.service.selPoint && this.service.selPoint.z == this.currentFloorIndex) {
             this.ctx.strokeStyle = 'red';
             this.ctx.lineWidth = 1;
             this.ctx.strokeRect(
-                (this.serv.selPoint.x - 1) * k,
-                (this.serv.selPoint.y - 1) * k, 2 * k, 2 * k);
+                (this.service.selPoint.x - 1) * k,
+                (this.service.selPoint.y - 1) * k, 2 * k, 2 * k);
         }
     }
 
@@ -139,21 +144,34 @@ export class EditorComponent {
     this_mousedown(e: MouseEvent) {
         let x = Math.round(e.offsetX / this.scaleField);
         let y = Math.round(e.offsetY / this.scaleField);
-        // if point exist
-        let near: Point = this.serv.nearPointTo(x, y, this.currentFloorIndex);
-        if (near) {
-            this.serv.selPoint = near;
-        } else {
-            let p = new Point(x, y, this.currentFloorIndex);
-            this.serv.addPoint(p);
-        }
+        if (this.dash.mode == 'h' || this.dash.mode == 'v')
+            this.mousedownPoints(x, y);
         this.redraw();
     }
 
+
+    private mousedownPoints(x: number, y: number) {
+        // if point exist
+        let near: Point = this.service.nearPointTo(x, y, this.currentFloorIndex);
+        if (near) {
+            this.service.selPoint = near;
+        } else {
+            let p = new Point(x, y, this.currentFloorIndex);
+            this.service.addPoint(p);
+        }
+    }
+
+
+
+
     this_keydown(e: KeyboardEvent) {
-        if (e.key == "Delete") {
-            this.serv.deleteSelPoint();
-            this.redraw();
+        switch (e.key) {
+            case "Delete":
+                this.service.deleteSelPoint();
+                this.redraw();
+                break;
+            case "h": case "v":
+                this.dash.mode = e.key;
         }
     }
     // child's event handlers ///////////////////////
