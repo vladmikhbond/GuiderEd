@@ -28,9 +28,12 @@ const INFO_HEIGHT = 30;
     `],
     template: `
         <div (keydown)="this_keydown($event)" tabindex="1">
-            <editor-dash (onScaleChanged)="dash_Scaled($event)"
-                         (onFloorIndexChanged)="dash_FloorChanged($event)"></editor-dash>
+            
+            <dash (onScaleChanged)="dash_Scaled($event)"
+                         (onFloorIndexChanged)="dash_FloorChanged($event)"></dash>
+            
             <div id="info">{{info}}</div>
+            
             <div id="scrollBox" (scroll)="this_scroll($event)">
                 <canvas id="canvas" (mousemove)="this_mousemove($event)" (mousedown)="this_mousedown($event)"></canvas>
             </div>
@@ -44,6 +47,7 @@ const INFO_HEIGHT = 30;
         </div>
     `
 })
+
 export class EditorComponent {
 
     @ViewChild(DashComponent, {static: false})
@@ -57,7 +61,6 @@ export class EditorComponent {
 
     info: string = "";
 
-    currentFloorIndex = 0;
     service: EditorService;
 
 
@@ -81,7 +84,8 @@ export class EditorComponent {
 
 
     redraw(): void {
-        let img = this.bgImages[this.currentFloorIndex];
+        let fli = this.dash.floorIndex;
+        let img = this.bgImages[fli];
         let scl = this.dash.scale;
         // canvas size
         this.canvas = <HTMLCanvasElement>document.getElementById("canvas");
@@ -97,12 +101,12 @@ export class EditorComponent {
         // draw points
         this.ctx.lineWidth = 0.5;
 
-        for (let p of this.service.points.filter(p => p.z == this.currentFloorIndex )) {
+        for (let p of this.service.points.filter(p => p.z == fli )) {
             this.ctx.fillRect(p.x * scl - 0.5, p.y * scl - 0.5, 1, 1 );
             this.ctx.strokeRect((p.x - 1) * scl, (p.y - 1) * scl, 2 * scl, 2 * scl );
         }
         // draw selected point
-        if (this.service.selPoint && this.service.selPoint.z == this.currentFloorIndex) {
+        if (this.service.selPoint && this.service.selPoint.z == fli) {
             this.ctx.strokeStyle = 'red';
             this.ctx.lineWidth = 1;
             this.ctx.strokeRect(
@@ -111,19 +115,6 @@ export class EditorComponent {
         }
     }
 
-
-    // props ////////////////////////////////////
-
-    set scale(newScale: number) {
-        const k = newScale / this.dash.scale;
-        const w = screen.width / 2;
-        const h = (screen.height - DASH_HEIGHT) / 2;
-        this.scrollBox.scrollLeft = (this.scrollBox.scrollLeft + w) * k - w;
-        this.scrollBox.scrollTop = (this.scrollBox.scrollTop + h) * k - h;
-
-        this.dash.scale = newScale;
-        this.redraw();
-    }
 
     // this event handlers ///////////////////////
 
@@ -142,24 +133,32 @@ export class EditorComponent {
     this_mousedown(e: MouseEvent) {
         let x = Math.round(e.offsetX / this.dash.scale);
         let y = Math.round(e.offsetY / this.dash.scale);
-        if (this.dash.mode == 'h' || this.dash.mode == 'v')
-            this.hv_mousedown(x, y);
+        let mode = this.dash.mode;
+        if ( mode == 'h' || mode == 'v')
+            this.hv_mousedown(x, y, mode);
         this.redraw();
     }
 
 
-    private hv_mousedown(x: number, y: number) {
-        // if point exist
-        let near: Point = this.service.nearPointTo(x, y, this.currentFloorIndex);
+    private hv_mousedown(x: number, y: number, mode: string) {
+        let fli = this.dash.floorIndex;
+        let near: Point = this.service.nearPointTo(x, y, fli);
         if (near) {
+            // near point exists
             this.service.selPoint = near;
         } else {
-            let p = new Point(x, y, this.currentFloorIndex);
+            // a new point
+            let sel = this.service.selPoint;
+            if (sel) {
+                if (mode == 'h')
+                    y = sel.y;
+                if (mode == 'v')
+                    x = sel.x;
+            }
+            let p = new Point(x, y, fli);
             this.service.addPoint(p);
         }
     }
-
-
 
 
     this_keydown(e: KeyboardEvent) {
@@ -172,14 +171,18 @@ export class EditorComponent {
                 this.dash.mode = e.key;
         }
     }
+
     // child's event handlers ///////////////////////
 
-    dash_Scaled(newScale: number) {
-        this.scale = newScale;
+    dash_Scaled(k: number) {
+        const w = screen.width / 2;
+        const h = (screen.height - DASH_HEIGHT) / 2;
+        this.scrollBox.scrollLeft = (this.scrollBox.scrollLeft + w) * k - w;
+        this.scrollBox.scrollTop = (this.scrollBox.scrollTop + h) * k - h;
+        this.redraw();
     }
 
-    dash_FloorChanged(newIndex: number) {
-        this.currentFloorIndex = newIndex;
+    dash_FloorChanged() {
         this.redraw();
     }
 }

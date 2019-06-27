@@ -3,19 +3,17 @@
 const SCALE_FACTOR = 1.2;
 
 /*******************************************************************************
+ * Properties:
+ *     scale: number
+ *     mode: horPoints, verPoints, ladders, edges, tags
+ *     floorIndex: 0,1,2,3,4,5
  *
  * Output Events
- * onScaleChanged()   event: scale
- * onFloorChanged()   event: 0,1,2,3,4,5
- * onModeChanged()    event: horPoints, verPoints, ladders, edges, tags
- *
- * Private Properties:
- * scale: number
- * mode
- * floorIndex
-********************************************************************************/
+ *     onScaleChanged()   event: scaleFactor | 1/scaleFactor
+ *     onFloorChanged()
+ ********************************************************************************/
 @Component({
-    selector: 'editor-dash',
+    selector: 'dash',
     styles: [`
         #dash {
             width: 100%;
@@ -60,22 +58,24 @@ const SCALE_FACTOR = 1.2;
         </div>`
 
 })
+
 export class DashComponent {
 
     scale = 1;
     mode = 'n';
-    floorIndex = 1;
+    floorIndex = 0;
 
     @Output() onScaleChanged = new EventEmitter<number>();
     scaleChange(increased: boolean) {
-        this.scale *= increased ? SCALE_FACTOR : 1 / SCALE_FACTOR;
-        this.onScaleChanged.emit(this.scale);
+        let k = increased ? SCALE_FACTOR : 1 / SCALE_FACTOR;
+        this.scale *= k;
+        this.onScaleChanged.emit(k);
     }
 
-    @Output() onFloorIndexChanged = new EventEmitter<number>();
+    @Output() onFloorIndexChanged = new EventEmitter();
     floorChange(idx: number) {
         this.floorIndex = idx;
-        this.onFloorIndexChanged.emit(idx);
+        this.onFloorIndexChanged.emit();
     }
 
 }
