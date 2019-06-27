@@ -1,11 +1,33 @@
 //import {contains} from 'underscore';
-import {Point} from "./point";
+import {Point, Edge} from "./data.types";
+import {points, edges} from "./data";
 
 export class EditorService {
 
-    points: Point[] = [];
+    points: Point[];
+    edges: Edge[];
 
     selPoint: Point = null;
+
+    constructor() {
+        this.points = [];
+        for (let a of points) {
+            this.points.push(new Point(a[0], a[1], a[2]));
+        }
+
+        this.edges = [];
+        for (let a of edges) {
+            let p1 = this.points.find(p => p.x == a[0] && p.y == a[1] && p.z == a[2]);
+            let p2 = this.points.find(p => p.x == a[3] && p.y == a[4] && p.z == a[5]);
+            if (p1 && p2) {
+                this.edges.push(new Edge(p1, p2));
+            } else {
+                console.error(`cannot create Edge`, a);
+            }
+
+        }
+
+    }
 
     private indexOfPoint(point: Point) {
         return this.points.findIndex(p => p.x === point.x && p.y === point.y && p.z === point.z);

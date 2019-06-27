@@ -54,7 +54,7 @@ const SCALE_FACTOR = 1.2;
 
             <button mat-stroked-button (click)="scaleChange(true)">+</button>
             <button mat-stroked-button (click)="scaleChange(false)">-</button>
-            <span id="mode">mode: {{mode}}</span>
+            <span id="mode" title="L'adder points\nH'orizontal points\nV'ertical points\nE'dges\nT'ags\nN'one">mode: {{mode.toUpperCase()}}</span>
         </div>`
 
 })
@@ -80,8 +80,9 @@ export class DashComponent {
 
 }
 
-// todo: notifications in info
-// todo: edges mode
+
 // todo: save data
+// todo: edges mode
+
 // todo: tags mode
 

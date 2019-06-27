@@ -13,7 +13,7 @@ export class Edge
 {
     constructor(public a: Point, public b: Point) {
         let s = (a.x === b.x ? 1 : 0) + (a.y === b.y ? 1: 0) + (a.z === b.z ? 1: 0);
-        if (s !== 1)
+        if (s !== 2)
             throw new Error("bad adge");
     }
 

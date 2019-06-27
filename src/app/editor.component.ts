@@ -1,5 +1,5 @@
 ﻿import {Component,  ViewChild} from '@angular/core';
-import {Point} from './data/point';
+import {Point, Edge} from './data/data.types';
 import {EditorService} from "./data/editor.service";
 import {DashComponent} from './dash.component';
 
@@ -16,6 +16,7 @@ const INFO_HEIGHT = 30;
     selector: 'editor',
     styles: [`
         canvas {
+            cursor: crosshair;
         }
         #info {
             height: 30px;
@@ -58,7 +59,6 @@ export class EditorComponent {
     scrollBox: HTMLElement;
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
-
     info: string = "";
 
     service: EditorService;
@@ -105,6 +105,14 @@ export class EditorComponent {
             this.ctx.fillRect(p.x * scl - 0.5, p.y * scl - 0.5, 1, 1 );
             this.ctx.strokeRect((p.x - 1) * scl, (p.y - 1) * scl, 2 * scl, 2 * scl );
         }
+        // draw edges
+        this.ctx.beginPath();
+        for (let e of this.service.edges.filter(e => e.a.z == fli )) {
+            this.ctx.moveTo(e.a.x, e.a.y);
+            this.ctx.lineTo(e.b.x, e.b.y);
+        }
+        this.ctx.stroke();
+
         // draw selected point
         if (this.service.selPoint && this.service.selPoint.z == fli) {
             this.ctx.strokeStyle = 'red';
@@ -127,47 +135,55 @@ export class EditorComponent {
     this_mousemove(e: MouseEvent) {
         let x = Math.round(e.offsetX / this.dash.scale);
         let y = Math.round(e.offsetY / this.dash.scale);
-        this.info = `${x}  ${y}`;
+        // this.info = `${x}  ${y}`;
     }
 
     this_mousedown(e: MouseEvent) {
         let x = Math.round(e.offsetX / this.dash.scale);
         let y = Math.round(e.offsetY / this.dash.scale);
         let mode = this.dash.mode;
-        if ( mode == 'h' || mode == 'v')
-            this.hv_mousedown(x, y, mode);
+        if ( mode == 'h' || mode == 'v' || mode == 'l') {
+            this.this_mousedown_lhv(x, y, mode);
+        }
         this.redraw();
     }
 
 
-    private hv_mousedown(x: number, y: number, mode: string) {
+    private this_mousedown_lhv(x: number, y: number, mode: string) {
         let fli = this.dash.floorIndex;
         let near: Point = this.service.nearPointTo(x, y, fli);
         if (near) {
             // near point exists
             this.service.selPoint = near;
+            this.info = `Select point: x = ${x} y = ${y}`;
         } else {
             // a new point
             let sel = this.service.selPoint;
-            if (sel) {
-                if (mode == 'h')
-                    y = sel.y;
-                if (mode == 'v')
-                    x = sel.x;
+            if (sel && mode == 'h') {
+                this.service.addPoint(new Point(x, sel.y, fli));
             }
-            let p = new Point(x, y, fli);
-            this.service.addPoint(p);
+            if (sel && mode == 'v') {
+                this.service.addPoint(new Point(sel.x, y, fli));
+            }
+            if (mode == 'l') {
+                for (let i = 0; i < 6; i++) {
+                    this.service.addPoint(new Point(x, y, i));
+                    //todo: edges add too
+                }
+            }
+
+            this.info = `New point`;
         }
     }
 
-
     this_keydown(e: KeyboardEvent) {
-        switch (e.key) {
-            case "Delete":
+        switch (e.key.toLowerCase()) {
+            case "delete":
                 this.service.deleteSelPoint();
                 this.redraw();
+                this.info = `Point was deleted`;
                 break;
-            case "h": case "v": case "n":
+            case "h": case "v": case "n": case "l": case "e": case "t":
                 this.dash.mode = e.key;
         }
     }
@@ -183,6 +199,10 @@ export class EditorComponent {
     }
 
     dash_FloorChanged() {
+        this.service.selPoint = null;
         this.redraw();
+        this.info = `Floor changed: ${this.dash.floorIndex + 1} now.}`;
+
     }
+
 }
