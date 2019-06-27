@@ -79,3 +79,9 @@ export class DashComponent {
     }
 
 }
+
+// todo: notifications in info
+// todo: edges mode
+// todo: save data
+// todo: tags mode
+

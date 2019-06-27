@@ -110,8 +110,8 @@ export class EditorComponent {
             this.ctx.strokeStyle = 'red';
             this.ctx.lineWidth = 1;
             this.ctx.strokeRect(
-                (this.service.selPoint.x - 1) * scl,
-                (this.service.selPoint.y - 1) * scl, 2 * scl, 2 * scl);
+                (this.service.selPoint.x - 2) * scl,
+                (this.service.selPoint.y - 2) * scl, 4 * scl, 4 * scl);
         }
     }
 
