@@ -5,6 +5,12 @@ import {DashComponent} from './dash.component';
 
 const DASH_HEIGHT = 50;
 const INFO_HEIGHT = 30;
+/*******************************************************************************
+ *
+ * Properties:
+ * scale: number
+ *
+ ********************************************************************************/
 
 @Component({
     selector: 'editor',
@@ -23,13 +29,13 @@ const INFO_HEIGHT = 30;
     template: `
         <div (keydown)="this_keydown($event)" tabindex="1">
             <editor-dash (onScaleChanged)="dash_Scaled($event)"
-                         (onFloorChanged)="dash_FloorChanged($event)"></editor-dash>
+                         (onFloorIndexChanged)="dash_FloorChanged($event)"></editor-dash>
             <div id="info">{{info}}</div>
-            <div id="scrollBox" (scroll)="onScroll($event)">
+            <div id="scrollBox" (scroll)="this_scroll($event)">
                 <canvas id="canvas" (mousemove)="this_mousemove($event)" (mousedown)="this_mousedown($event)"></canvas>
             </div>
 
-            <img id="floor1" [src]="'assets/floors/1.svg'" (load)="init()" hidden alt="floor1"/>
+            <img id="floor1" [src]="'assets/floors/1ed.svg'" (load)="init()" hidden alt="floor1"/>
             <img id="floor2" [src]="'assets/floors/2.svg'" hidden alt="floor2"/>
             <img id="floor3" [src]="'assets/floors/3.svg'" hidden alt="floor3"/>
             <img id="floor4" [src]="'assets/floors/4.svg'" hidden alt="floor4"/>
@@ -50,10 +56,10 @@ export class EditorComponent {
     ctx: CanvasRenderingContext2D;
 
     info: string = "";
-    scaleField = 1;
+
     currentFloorIndex = 0;
     service: EditorService;
-    private mode: string;
+
 
     constructor(editorService: EditorService){
         this.service = editorService;
@@ -75,12 +81,12 @@ export class EditorComponent {
 
 
     redraw(): void {
-        let img = this.currentFloor;
-        let k = this.scaleField;
+        let img = this.bgImages[this.currentFloorIndex];
+        let scl = this.dash.scale;
         // canvas size
         this.canvas = <HTMLCanvasElement>document.getElementById("canvas");
-        this.canvas.width = img.width * k;
-        this.canvas.height = img.height * k;
+        this.canvas.width = img.width * scl;
+        this.canvas.height = img.height * scl;
 
         // draw back image
         this.ctx = this.canvas.getContext("2d");
@@ -92,65 +98,57 @@ export class EditorComponent {
         this.ctx.lineWidth = 0.5;
 
         for (let p of this.service.points.filter(p => p.z == this.currentFloorIndex )) {
-            this.ctx.fillRect(p.x * k - 0.5, p.y * k - 0.5, 1, 1 );
-            this.ctx.strokeRect((p.x - 1) * k, (p.y - 1) * k, 2 * k, 2 * k );
+            this.ctx.fillRect(p.x * scl - 0.5, p.y * scl - 0.5, 1, 1 );
+            this.ctx.strokeRect((p.x - 1) * scl, (p.y - 1) * scl, 2 * scl, 2 * scl );
         }
         // draw selected point
         if (this.service.selPoint && this.service.selPoint.z == this.currentFloorIndex) {
             this.ctx.strokeStyle = 'red';
             this.ctx.lineWidth = 1;
             this.ctx.strokeRect(
-                (this.service.selPoint.x - 1) * k,
-                (this.service.selPoint.y - 1) * k, 2 * k, 2 * k);
+                (this.service.selPoint.x - 1) * scl,
+                (this.service.selPoint.y - 1) * scl, 2 * scl, 2 * scl);
         }
     }
 
 
-    onScroll(e: Event) {
-        let x = (<HTMLElement>e.target).scrollLeft;
-        let y = (<HTMLElement>e.target).scrollTop;
-        this.info = `scrollX: ${x | 0}    scrollY:  ${y | 0}`;
-    }
-
     // props ////////////////////////////////////
 
     set scale(newScale: number) {
-        const k = newScale / this.scaleField;
+        const k = newScale / this.dash.scale;
         const w = screen.width / 2;
         const h = (screen.height - DASH_HEIGHT) / 2;
         this.scrollBox.scrollLeft = (this.scrollBox.scrollLeft + w) * k - w;
         this.scrollBox.scrollTop = (this.scrollBox.scrollTop + h) * k - h;
 
-        this.scaleField = newScale;
+        this.dash.scale = newScale;
         this.redraw();
-    }
-
-    get scale() {
-        return this.scaleField;
-    }
-
-    get currentFloor() {
-        return this.bgImages[this.currentFloorIndex];
     }
 
     // this event handlers ///////////////////////
 
+    this_scroll(e: Event) {
+        let x = (<HTMLElement>e.target).scrollLeft;
+        let y = (<HTMLElement>e.target).scrollTop;
+        this.info = `scrollX: ${x | 0}    scrollY:  ${y | 0}`;
+    }
+
     this_mousemove(e: MouseEvent) {
-        let x = Math.round(e.offsetX / this.scaleField);
-        let y = Math.round(e.offsetY / this.scaleField);
+        let x = Math.round(e.offsetX / this.dash.scale);
+        let y = Math.round(e.offsetY / this.dash.scale);
         this.info = `${x}  ${y}`;
     }
 
     this_mousedown(e: MouseEvent) {
-        let x = Math.round(e.offsetX / this.scaleField);
-        let y = Math.round(e.offsetY / this.scaleField);
+        let x = Math.round(e.offsetX / this.dash.scale);
+        let y = Math.round(e.offsetY / this.dash.scale);
         if (this.dash.mode == 'h' || this.dash.mode == 'v')
-            this.mousedownPoints(x, y);
+            this.hv_mousedown(x, y);
         this.redraw();
     }
 
 
-    private mousedownPoints(x: number, y: number) {
+    private hv_mousedown(x: number, y: number) {
         // if point exist
         let near: Point = this.service.nearPointTo(x, y, this.currentFloorIndex);
         if (near) {
@@ -170,7 +168,7 @@ export class EditorComponent {
                 this.service.deleteSelPoint();
                 this.redraw();
                 break;
-            case "h": case "v":
+            case "h": case "v": case "n":
                 this.dash.mode = e.key;
         }
     }

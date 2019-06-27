@@ -11,7 +11,8 @@ const SCALE_FACTOR = 1.2;
  *
  * Private Properties:
  * scale: number
- *
+ * mode
+ * floorIndex
 ********************************************************************************/
 @Component({
     selector: 'editor-dash',
@@ -46,7 +47,7 @@ const SCALE_FACTOR = 1.2;
     template: `
         <div id="dash">
             <mat-form-field>
-                <mat-select (valueChange)="floorChange($event)" [value]="0">
+                <mat-select (valueChange)="floorChange($event)" [value]="floorIndex">
                     <mat-option *ngFor="let i of [1,2,3,4,5,6]" [value]="i-1">
                         {{i}}
                     </mat-option>
@@ -62,7 +63,8 @@ const SCALE_FACTOR = 1.2;
 export class DashComponent {
 
     scale = 1;
-    mode = 'x';
+    mode = 'n';
+    floorIndex = 1;
 
     @Output() onScaleChanged = new EventEmitter<number>();
     scaleChange(increased: boolean) {
@@ -70,9 +72,10 @@ export class DashComponent {
         this.onScaleChanged.emit(this.scale);
     }
 
-    @Output() onFloorChanged = new EventEmitter<number>();
+    @Output() onFloorIndexChanged = new EventEmitter<number>();
     floorChange(idx: number) {
-        this.onFloorChanged.emit(idx);
+        this.floorIndex = idx;
+        this.onFloorIndexChanged.emit(idx);
     }
 
 }
