@@ -108,8 +108,8 @@ export class MainComponent {
         // draw edges
         this.ctx.beginPath();
         for (let e of this.service.edges.filter(e => e.a.z == fli )) {
-            this.ctx.moveTo(e.a.x, e.a.y);
-            this.ctx.lineTo(e.b.x, e.b.y);
+            this.ctx.moveTo(e.a.x * scl, e.a.y * scl);
+            this.ctx.lineTo(e.b.x * scl, e.b.y * scl);
         }
         this.ctx.stroke();
 
