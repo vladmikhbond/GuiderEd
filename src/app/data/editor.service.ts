@@ -1,4 +1,4 @@
-//import {contains} from 'underscore';
+//import { map } from 'underscore';
 import {Point, Edge} from "./data.types";
 import {points, edges} from "./data";
 
@@ -55,4 +55,12 @@ export class EditorService {
     nearPointTo(x: number, y: number, z: number): Point {
         return this.points.find(p => Math.abs(p.x - x) < 3 && Math.abs(p.y - y) < 3 && p.z == z);
     }
+
+    getData(): string {
+        let ps = this.points.map(p => [p.x, p.y, p.z] );
+        let es = this.edges.map(e => [e.a.x, e.a.y, e.a.z, e.b.x, e.b.y, e.b.z] );
+        return `export const points: number[][] = ${JSON.stringify(ps)}; 
+export const edges: number[][] = ${JSON.stringify(es)};`;
+    }
 }
+

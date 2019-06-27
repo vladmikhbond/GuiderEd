@@ -1,4 +1,6 @@
 ﻿import { Component, EventEmitter, Output} from '@angular/core';
+import {Point, Edge} from './data/data.types';
+import {EditorService} from "./data/editor.service";
 
 const SCALE_FACTOR = 1.2;
 
@@ -41,6 +43,12 @@ const SCALE_FACTOR = 1.2;
             padding: 0;
             background-color: white;
         }
+        #clip {
+            width: 60px; 
+            height: 30px;
+            max-height: 30px;
+            margin: 0 0 0 10px;
+        }
     `],
     template: `
         <div id="dash">
@@ -54,7 +62,10 @@ const SCALE_FACTOR = 1.2;
 
             <button mat-stroked-button (click)="scaleChange(true)">+</button>
             <button mat-stroked-button (click)="scaleChange(false)">-</button>
-            <span id="mode" title="L'adder points\nH'orizontal points\nV'ertical points\nE'dges\nT'ags\nN'one">mode: {{mode.toUpperCase()}}</span>
+            <span id="mode"
+                  title="L'adder points\nH'orizontal points\nV'ertical points\nE'dges\nT'ags\nN'one">mode: {{mode.toUpperCase()}}</span>
+            <button mat-stroked-button (click)="dataToClipboard()">Export</button>
+            <textarea id="clip"></textarea>
         </div>`
 
 })
@@ -64,6 +75,14 @@ export class DashComponent {
     scale = 1;
     mode = 'n';
     floorIndex = 0;
+
+    service: EditorService;
+
+    constructor(editorService: EditorService){
+        this.service = editorService;
+    }
+
+
 
     @Output() onScaleChanged = new EventEmitter<number>();
     scaleChange(increased: boolean) {
@@ -78,11 +97,16 @@ export class DashComponent {
         this.onFloorIndexChanged.emit();
     }
 
+    dataToClipboard() {
+        let el = <HTMLInputElement>document.getElementById("clip");
+        el.value = this.service.getData();
+        el.select();
+        document.execCommand("copy");
+    }
 }
 
 
-// todo: save data
-// todo: edges mode
-
-// todo: tags mode
+//todo: data import
+//todo: edges mode
+//todo: tags mode
 

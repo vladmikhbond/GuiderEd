@@ -31,7 +31,7 @@ const INFO_HEIGHT = 30;
         <div (keydown)="this_keydown($event)" tabindex="1">
             
             <dash (onScaleChanged)="dash_Scaled($event)"
-                         (onFloorIndexChanged)="dash_FloorChanged($event)"></dash>
+                         (onFloorIndexChanged)="dash_FloorChanged()"></dash>
             
             <div id="info">{{info}}</div>
             
@@ -49,7 +49,7 @@ const INFO_HEIGHT = 30;
     `
 })
 
-export class EditorComponent {
+export class MainComponent {
 
     @ViewChild(DashComponent, {static: false})
     dash: DashComponent;
