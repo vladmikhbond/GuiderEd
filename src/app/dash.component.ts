@@ -25,13 +25,11 @@ const SCALE_FACTOR = 1.2;
             margin: 0;
         }
         #mode {
-            font-size: 20px;
+            font-size: 40px;
             margin: 0 10px 0 10px;
             text-align: center;
         }
-        mat-form-field, button, #clip {
-            min-width: 50px;
-            min-height: 50px;
+        mat-form-field, button, textarea {
             width: 50px;
             height: 50px;
             background-color: white;
@@ -62,8 +60,9 @@ const SCALE_FACTOR = 1.2;
 
             <button mat-stroked-button (click)="scaleChange(true)">+</button>
             <button mat-stroked-button (click)="scaleChange(false)">-</button>
-            <span id="mode"
-                  title="L'adder points\nH'orizontal points\nV'ertical points\nE'dges\nT'ags\nN'one">mode: {{mode.toUpperCase()}}</span>
+            
+            <span id="mode" title={{mode_title}} >{{mode.toUpperCase()}}</span>
+            
             <button mat-stroked-button (click)="exportData()">Export</button>
             <textarea id="clip"></textarea>
             <button mat-stroked-button (click)="importData()">Import</button>
@@ -75,6 +74,13 @@ export class DashComponent {
 
     scale = SCALE_FACTOR ** 4; // initial scale
     mode = 'n';
+    mode_title =
+`N-neutral
+L-ladders
+H-horizontal points
+V-vertical points
+E-edges
+T-tags`;
     floorIndex = 0;
 
     service: EditorService;

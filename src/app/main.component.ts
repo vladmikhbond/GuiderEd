@@ -16,7 +16,7 @@ const INFO_HEIGHT = 30;
     selector: 'editor',
     styles: [`
         canvas {
-            cursor: text;
+            
         }
         #info {
             height: 30px;
@@ -49,8 +49,8 @@ const INFO_HEIGHT = 30;
     `
 })
 
-export class MainComponent {
-
+export class MainComponent
+{
     @ViewChild(DashComponent, {static: false})
     dash: DashComponent;
 
@@ -206,32 +206,43 @@ export class MainComponent {
     }
 
     this_keydown(e: KeyboardEvent) {
-        switch (e.key.toLowerCase()) {
-            case "delete":
-                switch (this.dash.mode) {
-                    case 'h': case 'v':
-                        this.service.deleteSelectedPoint();
-                        this.info = `Point was deleted`;
-                        this.redraw();
-                        break;
-                    case 'e':
-                        this.service.deleteSelectedEdge();
-                        this.info = `Edge was deleted`;
-                        this.redraw();
-                        break;
-                }
-                break;
-            case "n":
-                this.service.selPoint = null;
-                this.service.selEdge = null;
-                this.redraw();
-                this.dash.mode = e.key;
-                break;
-            case "h": case "v": case "l": case "e": case "t":
-                this.dash.mode = e.key;
-                break;
+        const key = e.key.toLowerCase();
+
+        if (key == "delete") {
+            switch (this.dash.mode) {
+                case 'h': case 'v':
+                    this.service.deleteSelectedPoint();
+                    this.info = `Point was deleted`;
+
+                    break;
+                case 'e':
+                    this.service.deleteSelectedEdge();
+                    this.info = `Edge was deleted`;
+
+                    break;
+            }
+            this.redraw();
+            return;
         }
-    }
+        // switch mode
+        if (key == "n") {
+            this.service.selPoint = null;
+            this.service.selEdge = null;
+            this.scrollBox.style.cursor = "default";
+        } else if (key == "h") {
+            this.scrollBox.style.cursor = "text";
+        }  else if (key == "v") {
+            this.scrollBox.style.cursor = "vertical-text";
+        } else {
+            this.scrollBox.style.cursor = "crosshair";
+        }
+
+        if ("nhvlet".indexOf(key) != -1) {
+            this.dash.mode = key;
+            this.redraw();
+        }
+
+     }
 
     // child's event handlers ///////////////////////
 
@@ -247,12 +258,11 @@ export class MainComponent {
         this.service.selPoint = null;
         this.redraw();
         this.info = `Floor changed to ${this.dash.floorIndex + 1}`;
-
     }
+
 
 }
 
-//todo: tags mode
-//todo: change cursor - crosshair, vertical-text  text  default
-//todo: separate L-mode
+//todo: separate L-mode  (add, delete ladder)
+
 //todo: implement T-mode
