@@ -1,10 +1,15 @@
-export const points: number[][] = [
+const points: number[][] = [
     [100, 100, 0], [200, 100, 0], [200, 200, 0],
 ];
 
-export const edges: number[][] = [
+const edges: number[][] = [
     [100, 100, 0, 200, 100, 0],
     [200, 100, 0, 200, 200, 0],
 ];
+
+export const obj = {
+    "points": points,
+    "edges": edges
+};
 
 

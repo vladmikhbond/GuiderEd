@@ -1,5 +1,5 @@
 ﻿import {Component,  ViewChild} from '@angular/core';
-import {Point, Edge} from './data/data.types';
+import {Point} from './data/data.types';
 import {EditorService} from "./data/editor.service";
 import {DashComponent} from './dash.component';
 
@@ -16,7 +16,7 @@ const INFO_HEIGHT = 30;
     selector: 'editor',
     styles: [`
         canvas {
-            cursor: crosshair;
+            cursor: text;
         }
         #info {
             height: 30px;
@@ -29,12 +29,12 @@ const INFO_HEIGHT = 30;
     `],
     template: `
         <div (keydown)="this_keydown($event)" tabindex="1">
-            
+
             <dash (onScaleChanged)="dash_Scaled($event)"
-                         (onFloorIndexChanged)="dash_FloorChanged()"></dash>
-            
+                  (onChanged)="dash_FloorChanged()"></dash>
+
             <div id="info">{{info}}</div>
-            
+
             <div id="scrollBox" (scroll)="this_scroll($event)">
                 <canvas id="canvas" (mousemove)="this_mousemove($event)" (mousedown)="this_mousedown($event)"></canvas>
             </div>
@@ -105,6 +105,8 @@ export class MainComponent {
             this.ctx.fillRect(p.x * scl - 0.5, p.y * scl - 0.5, 1, 1 );
             this.ctx.strokeRect((p.x - 1) * scl, (p.y - 1) * scl, 2 * scl, 2 * scl );
         }
+
+
         // draw edges
         this.ctx.beginPath();
         for (let e of this.service.edges.filter(e => e.a.z == fli )) {
@@ -114,12 +116,23 @@ export class MainComponent {
         this.ctx.stroke();
 
         // draw selected point
-        if (this.service.selPoint && this.service.selPoint.z == fli) {
+        let selP = this.service.selPoint;
+        if (selP && selP.z == fli) {
             this.ctx.strokeStyle = 'red';
             this.ctx.lineWidth = 1;
             this.ctx.strokeRect(
-                (this.service.selPoint.x - 2) * scl,
-                (this.service.selPoint.y - 2) * scl, 4 * scl, 4 * scl);
+                (selP.x - 2) * scl,
+                (selP.y - 2) * scl, 4 * scl, 4 * scl);
+        }
+        // draw selected edge
+        let selE = this.service.selEdge;
+        if (selE && selE.a.z == fli) {
+            this.ctx.strokeStyle = 'red';
+            this.ctx.lineWidth = 1;
+            this.ctx.beginPath();
+            this.ctx.moveTo(selE.a.x * scl, selE.a.y * scl);
+            this.ctx.lineTo(selE.b.x * scl, selE.b.y * scl);
+            this.ctx.stroke();
         }
     }
 
@@ -135,19 +148,31 @@ export class MainComponent {
     this_mousemove(e: MouseEvent) {
         let x = Math.round(e.offsetX / this.dash.scale);
         let y = Math.round(e.offsetY / this.dash.scale);
-        // this.info = `${x}  ${y}`;
+        this.info = `(${x} , ${y})`;
     }
 
     this_mousedown(e: MouseEvent) {
         let x = Math.round(e.offsetX / this.dash.scale);
         let y = Math.round(e.offsetY / this.dash.scale);
         let mode = this.dash.mode;
-        if ( mode == 'h' || mode == 'v' || mode == 'l') {
+        if ( mode == 'h' || mode == 'v' || mode == 'l')
             this.this_mousedown_lhv(x, y, mode);
-        }
+        else if ( mode == 'e')
+            this.this_mousedown_e(x, y);
+        //
         this.redraw();
     }
 
+    private this_mousedown_e(x: number, y: number) {
+        let fli = this.dash.floorIndex;
+        if (!this.service.trySelectEdge(x, y, this.dash.scale)) {
+            // new edge
+            if (this.service.tryCreateEdge(x, y, fli))
+                this.redraw();
+        } else {
+            this.redraw();
+        }
+    }
 
     private this_mousedown_lhv(x: number, y: number, mode: string) {
         let fli = this.dash.floorIndex;
@@ -155,36 +180,56 @@ export class MainComponent {
         if (near) {
             // near point exists
             this.service.selPoint = near;
-            this.info = `Select point: x = ${x} y = ${y}`;
+            this.info = `Just select point (${x},${y})`;
         } else {
             // a new point
             let sel = this.service.selPoint;
-            if (sel && mode == 'h') {
-                this.service.addPoint(new Point(x, sel.y, fli));
+            // sel point is on another floor
+            if (sel && sel.z != fli) {
+                sel = null;
             }
-            if (sel && mode == 'v') {
-                this.service.addPoint(new Point(sel.x, y, fli));
+            if (sel && sel.z == fli) {
+                // sel point is on the floor
+                if (mode == 'h')
+                    this.service.addPoint(new Point(x, sel.y, fli));
+                if (mode == 'v')
+                    this.service.addPoint(new Point(sel.x, y, fli));
+            } else {
+                // no sel point on the floor
+                this.service.addPoint(new Point(x, y, fli));
             }
             if (mode == 'l') {
-                for (let i = 0; i < 6; i++) {
-                    this.service.addPoint(new Point(x, y, i));
-                    //todo: edges add too
-                }
+                this.service.addLadders(x, y);
+                this.info = `New ladder points`;
             }
-
-            this.info = `New point`;
         }
     }
 
     this_keydown(e: KeyboardEvent) {
         switch (e.key.toLowerCase()) {
             case "delete":
-                this.service.deleteSelPoint();
-                this.redraw();
-                this.info = `Point was deleted`;
+                switch (this.dash.mode) {
+                    case 'h': case 'v':
+                        this.service.deleteSelectedPoint();
+                        this.info = `Point was deleted`;
+                        this.redraw();
+                        break;
+                    case 'e':
+                        this.service.deleteSelectedEdge();
+                        this.info = `Edge was deleted`;
+                        this.redraw();
+                        break;
+                }
                 break;
-            case "h": case "v": case "n": case "l": case "e": case "t":
+            case "n":
+                this.service.selPoint = null;
+                this.service.selEdge = null;
+                this.redraw();
                 this.dash.mode = e.key;
+                break;
+            case "h": case "v": case "l": case "e": case "t":
+                this.dash.mode = e.key;
+                break;
         }
     }
 
@@ -201,8 +246,13 @@ export class MainComponent {
     dash_FloorChanged() {
         this.service.selPoint = null;
         this.redraw();
-        this.info = `Floor changed: ${this.dash.floorIndex + 1} now.}`;
+        this.info = `Floor changed to ${this.dash.floorIndex + 1}`;
 
     }
 
 }
+
+//todo: tags mode
+//todo: change cursor - crosshair, vertical-text  text  default
+//todo: separate L-mode
+//todo: implement T-mode

@@ -1,5 +1,4 @@
 ﻿import { Component, EventEmitter, Output} from '@angular/core';
-import {Point, Edge} from './data/data.types';
 import {EditorService} from "./data/editor.service";
 
 const SCALE_FACTOR = 1.2;
@@ -12,7 +11,7 @@ const SCALE_FACTOR = 1.2;
  *
  * Output Events
  *     onScaleChanged()   event: scaleFactor | 1/scaleFactor
- *     onFloorChanged()
+ *     onChanged()
  ********************************************************************************/
 @Component({
     selector: 'dash',
@@ -20,34 +19,35 @@ const SCALE_FACTOR = 1.2;
         #dash {
             width: 100%;
             min-width: 320px;
-            text-align: center;
-            vertical-align: center;
+            padding-left: 20px;
             height: 50px;
             background-color: darkorange;
             margin: 0;
         }
         #mode {
-            font-size: 28px;
-            margin-left: 20px;
+            font-size: 20px;
+            margin: 0 10px 0 10px;
+            text-align: center;
         }
-        mat-form-field {
+        mat-form-field, button, #clip {
+            min-width: 50px;
+            min-height: 50px;
             width: 50px;
             height: 50px;
             background-color: white;
             border: solid thin lightblue;
+            vertical-align: top;
+            margin-left: 2px;
+            padding: 2px;
         }
-        button {
-            min-width: 50px;
-            width: 50px;
-            height: 50px;
-            padding: 0;
-            background-color: white;
+
+        mat-form-field{
+            font-size: 14px;
         }
-        #clip {
-            width: 60px; 
-            height: 30px;
-            max-height: 30px;
-            margin: 0 0 0 10px;
+        
+        textarea {
+             width: 100px;
+             z-index: -100;
         }
     `],
     template: `
@@ -64,15 +64,16 @@ const SCALE_FACTOR = 1.2;
             <button mat-stroked-button (click)="scaleChange(false)">-</button>
             <span id="mode"
                   title="L'adder points\nH'orizontal points\nV'ertical points\nE'dges\nT'ags\nN'one">mode: {{mode.toUpperCase()}}</span>
-            <button mat-stroked-button (click)="dataToClipboard()">Export</button>
+            <button mat-stroked-button (click)="exportData()">Export</button>
             <textarea id="clip"></textarea>
+            <button mat-stroked-button (click)="importData()">Import</button>
         </div>`
 
 })
 
 export class DashComponent {
 
-    scale = 1;
+    scale = SCALE_FACTOR ** 4; // initial scale
     mode = 'n';
     floorIndex = 0;
 
@@ -82,31 +83,36 @@ export class DashComponent {
         this.service = editorService;
     }
 
+    @Output()
+    onScaleChanged = new EventEmitter<number>();
+    @Output()
+    onChanged = new EventEmitter();   // signal to redraw the map
 
-
-    @Output() onScaleChanged = new EventEmitter<number>();
     scaleChange(increased: boolean) {
         let k = increased ? SCALE_FACTOR : 1 / SCALE_FACTOR;
         this.scale *= k;
         this.onScaleChanged.emit(k);
     }
 
-    @Output() onFloorIndexChanged = new EventEmitter();
     floorChange(idx: number) {
         this.floorIndex = idx;
-        this.onFloorIndexChanged.emit();
+        this.onChanged.emit();
     }
 
-    dataToClipboard() {
+    exportData() {
         let el = <HTMLInputElement>document.getElementById("clip");
-        el.value = this.service.getData();
+        el.value = this.service.exportData();
+        // data to clipboard
         el.select();
         document.execCommand("copy");
     }
+
+    importData() {
+        let el = <HTMLInputElement>document.getElementById("clip");
+        this.service.importData(el.value);
+        this.onChanged.emit();
+    }
+
 }
 
-
-//todo: data import
-//todo: edges mode
-//todo: tags mode
 
