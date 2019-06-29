@@ -15,11 +15,9 @@ const INFO_HEIGHT = 30;
 @Component({
     selector: 'editor',
     styles: [`
-        canvas {
-            
-        }
         #info {
-            height: 30px;
+            height: 40px;
+           
         }
         #scrollBox {
             width: 100%;
@@ -34,8 +32,6 @@ const INFO_HEIGHT = 30;
                   (onChanged)="dash_FloorChanged()"></dash>
 
             <div>
-                <input [(ngModel)]="tags"  />
-                <button (click)="saveSelTags()">Save</button>
                 <span id="info">{{info}}</span>    
             </div>
             
@@ -65,7 +61,6 @@ export class MainComponent
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
     info: string = "";
-    tags: string = "";
     service: EditorService;
 
 
@@ -185,7 +180,7 @@ export class MainComponent
         if (near) {
             // near point exists
             this.service.selPoint = near;
-            this.tags = near.tags;
+            this.dash.tags = near.tags;
             this.info = `Just select point (${x},${y})`;
         } else {
             // a new point
@@ -243,17 +238,12 @@ export class MainComponent
             this.scrollBox.style.cursor = "crosshair";
         }
 
-        if ("nhvlet".indexOf(key) != -1) {
+        if ("hlevn".indexOf(key) != -1) {
             this.dash.mode = key;
             this.redraw();
         }
      }
 
-    saveSelTags() {
-        if (this.service.selPoint) {
-            this.service.selPoint.tags = this.tags;
-        }
-    }
 
 
     // child's event handlers ///////////////////////
@@ -277,4 +267,4 @@ export class MainComponent
 
 //todo: separate L-mode  (add, delete ladder)
 
-//todo: implement T-mode
+//todo: dashboard appearance

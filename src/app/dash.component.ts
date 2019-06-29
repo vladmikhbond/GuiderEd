@@ -47,6 +47,12 @@ const SCALE_FACTOR = 1.2;
              width: 100px;
              z-index: -100;
         }
+
+        #tags {
+            width: 120px;
+            margin-left: 20px;
+        }
+
     `],
     template: `
         <div id="dash">
@@ -66,6 +72,10 @@ const SCALE_FACTOR = 1.2;
             <button mat-stroked-button (click)="exportData()">Export</button>
             <textarea id="clip"></textarea>
             <button mat-stroked-button (click)="importData()">Import</button>
+
+            <input id="tags" [(ngModel)]="tags"  />
+            <button (click)="saveSelTags()">Save</button>
+            
         </div>`
 
 })
@@ -79,10 +89,9 @@ export class DashComponent {
 L-ladders
 H-horizontal points
 V-vertical points
-E-edges
-T-tags`;
+E-edges`;
     floorIndex = 0;
-    selTag = "";
+    tags: string = "";
 
     service: EditorService;
 
@@ -118,6 +127,13 @@ T-tags`;
         let el = <HTMLInputElement>document.getElementById("clip");
         this.service.importData(el.value);
         this.onChanged.emit();
+    }
+
+
+    saveSelTags() {
+        if (this.service.selPoint) {
+            this.service.selPoint.tags = this.tags;
+        }
     }
 
 }
