@@ -154,12 +154,17 @@ export class MainComponent
     this_mousedown(e: MouseEvent) {
         let x = Math.round(e.offsetX / this.dash.scale);
         let y = Math.round(e.offsetY / this.dash.scale);
-        let mode = this.dash.mode;
-        if ( mode == 'h' || mode == 'v' || mode == 'l')
-            this.this_mousedown_lhv(x, y, mode);
-        else if ( mode == 'e')
-            this.this_mousedown_e(x, y);
-        //
+        switch(this.dash.mode) {
+            case 'h': case 'v':
+                this.this_mousedown_hv(x, y, this.dash.mode);
+                break;
+            case 'l':
+                this.this_mousedown_l(x, y);
+                break;
+            case 'e':
+                this.this_mousedown_e(x, y);
+                break;
+        }
         this.redraw();
     }
 
@@ -167,14 +172,11 @@ export class MainComponent
         let fli = this.dash.floorIndex;
         if (!this.service.trySelectEdge(x, y, this.dash.scale)) {
             // new edge
-            if (this.service.tryCreateEdge(x, y, fli))
-                this.redraw();
-        } else {
-            this.redraw();
+            this.service.tryCreateEdge(x, y, fli)
         }
     }
 
-    private this_mousedown_lhv(x: number, y: number, mode: string) {
+    private this_mousedown_hv(x: number, y: number, mode: string) {
         let fli = this.dash.floorIndex;
         let near: Point = this.service.nearPointTo(x, y, fli);
         if (near) {
@@ -199,10 +201,21 @@ export class MainComponent
                 // no sel point on the floor
                 this.service.addPoint(new Point(x, y, fli));
             }
-            if (mode == 'l') {
-                this.service.addLadders(x, y);
-                this.info = `New ladder points`;
-            }
+         }
+    }
+
+    private this_mousedown_l(x: number, y: number) {
+        let fli = this.dash.floorIndex;
+        let near: Point = this.service.nearPointTo(x, y, fli);
+        if (near) {
+            // near point exists
+            this.service.selPoint = near;
+            this.dash.tags = near.tags;
+            this.info = `Just select point (${x},${y})`;
+        } else {
+            // a new ladder
+            this.service.addLadders(x, y);
+            this.info = `New ladder created`;
         }
     }
 
@@ -214,12 +227,14 @@ export class MainComponent
                 case 'h': case 'v':
                     this.service.deleteSelectedPoint();
                     this.info = `Point was deleted`;
-
                     break;
                 case 'e':
                     this.service.deleteSelectedEdge();
                     this.info = `Edge was deleted`;
-
+                    break;
+                case 'l':
+                    this.service.deleteSelectedLadder();
+                    this.info = `Edge was deleted`;
                     break;
             }
             this.redraw();

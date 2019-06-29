@@ -50,29 +50,36 @@ export class EditorService {
         this.selPoint = newPoint;
     }
 
+    deletePoint(p: Point) {
+        let idx = this.indexOfPoint(p);
+        if (idx === -1)
+            return;
+        // delete point's edges
+        let es = this.edges;
+        for (let i = 0; i < es.length; ) {
+            if (es[i].a == p || es[i].b == p)
+                es.splice(i, 1);
+            else
+                i++;
+        }
+        // delete point
+        let ps = this.points;
+        ps.splice(idx, 1);
+    }
+
     deleteSelectedPoint() {
         if (this.selPoint) {
-            let idx = this.indexOfPoint(this.selPoint);
-            if (idx === -1)
-                return;
-            // delete selected point's edges
-            let es = this.edges;
-            for (let i = 0; i < es.length; ) {
-                if (es[i].a == this.selPoint || es[i].b == this.selPoint)
-                    es.splice(i, 1);
-                else
-                    i++;
-            }
-            // delete selected point
-            let ps = this.points;
-            ps.splice(idx, 1);
+            this.deletePoint(this.selPoint);
             this.selPoint = null;
         }
     }
 
+
     nearPointTo(x: number, y: number, z: number): Point {
         return this.points.find(p => Math.abs(p.x - x) < 3 && Math.abs(p.y - y) < 3 && p.z == z);
     }
+
+    //////////////////////// ladders //////////////////////
 
     addLadders(x: number, y: number) {
         let a = new Point(x, y, 0, "L");
@@ -84,6 +91,14 @@ export class EditorService {
             a = b;
         }
 
+    }
+
+    deleteSelectedLadder() {
+        if (this.selPoint && this.selPoint.tags.startsWith("L") ) {
+            this.points.filter(p => p.x == this.selPoint.x && p.y == this.selPoint.y)
+                .forEach(p => this.deletePoint(p));
+            this.selPoint = null;
+        }
     }
 
     //////////////////////// edges //////////////////////
@@ -138,7 +153,6 @@ export class EditorService {
 
     //////////////////////// data //////////////////////
 
-
     exportData() {
         let ps = this.points.map(p => [p.x, p.y, p.z] );
         let ts = this.points.map(p => p.tags );
@@ -156,7 +170,6 @@ export class EditorService {
             alert(err);
         }
     }
-
 
 }
 
