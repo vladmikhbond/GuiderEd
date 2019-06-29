@@ -81,16 +81,21 @@ export class EditorService {
 
     //////////////////////// ladders //////////////////////
 
-    addLadders(x: number, y: number) {
+    // Add ladder block and do point (x,y,z) selected.
+    //
+    addLadders(x: number, y: number, z: number) {
         let a = new Point(x, y, 0, "L");
+        let sel = a;
         this.addPoint(a);
         for (let i = 1; i < 6; i++) {
             let b = new Point(x, y, i, "L");
             this.addPoint(b);
             this.edges.push(new Edge(a, b));
             a = b;
+            if (i == z)
+                sel = a;
         }
-
+        this.selPoint = sel;
     }
 
     deleteSelectedLadder() {

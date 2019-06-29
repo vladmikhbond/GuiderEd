@@ -214,7 +214,7 @@ export class MainComponent
             this.info = `Just select point (${x},${y})`;
         } else {
             // a new ladder
-            this.service.addLadders(x, y);
+            this.service.addLadders(x, y, fli);
             this.info = `New ladder created`;
         }
     }
