@@ -82,6 +82,7 @@ V-vertical points
 E-edges
 T-tags`;
     floorIndex = 0;
+    selTag = "";
 
     service: EditorService;
 

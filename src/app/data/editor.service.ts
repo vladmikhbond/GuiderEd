@@ -17,9 +17,11 @@ export class EditorService {
         this.selPoint = this.selEdge = null;
         // create points
         this.points = [];
-        for (let a of obj.points) {
-            this.points.push(new Point(a[0], a[1], a[2]));
+        for (let i = 0; i < obj.points.length; i++) {
+            let p = obj.points[i];
+            this.points.push(new Point(p[0], p[1], p[2], obj.tags[i]));
         }
+
         // create edges
         this.edges = [];
         for (let a of obj.edges) {
@@ -64,7 +66,7 @@ export class EditorService {
             // delete selected point
             let ps = this.points;
             ps.splice(idx, 1);
-            this.selPoint = ps.length == 0 ? null : ps[ps.length - 1];
+            this.selPoint = null;
         }
     }
 
@@ -139,8 +141,9 @@ export class EditorService {
 
     exportData() {
         let ps = this.points.map(p => [p.x, p.y, p.z] );
+        let ts = this.points.map(p => p.tags );
         let es = this.edges.map(e => [e.a.x, e.a.y, e.a.z, e.b.x, e.b.y, e.b.z] );
-        return JSON.stringify({"points": ps, "edges": es});
+        return JSON.stringify({"points": ps, "tags": ts, "edges": es});
     }
 
     importData(jsonStr: string) {

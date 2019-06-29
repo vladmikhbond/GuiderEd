@@ -33,7 +33,12 @@ const INFO_HEIGHT = 30;
             <dash (onScaleChanged)="dash_Scaled($event)"
                   (onChanged)="dash_FloorChanged()"></dash>
 
-            <div id="info">{{info}}</div>
+            <div>
+                <input [(ngModel)]="tags"  />
+                <button (click)="saveSelTags()">Save</button>
+                <span id="info">{{info}}</span>    
+            </div>
+            
 
             <div id="scrollBox" (scroll)="this_scroll($event)">
                 <canvas id="canvas" (mousemove)="this_mousemove($event)" (mousedown)="this_mousedown($event)"></canvas>
@@ -60,7 +65,7 @@ export class MainComponent
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
     info: string = "";
-
+    tags: string = "";
     service: EditorService;
 
 
@@ -180,6 +185,7 @@ export class MainComponent
         if (near) {
             // near point exists
             this.service.selPoint = near;
+            this.tags = near.tags;
             this.info = `Just select point (${x},${y})`;
         } else {
             // a new point
@@ -241,8 +247,14 @@ export class MainComponent
             this.dash.mode = key;
             this.redraw();
         }
-
      }
+
+    saveSelTags() {
+        if (this.service.selPoint) {
+            this.service.selPoint.tags = this.tags;
+        }
+    }
+
 
     // child's event handlers ///////////////////////
 
