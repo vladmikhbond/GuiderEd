@@ -2,7 +2,7 @@
 export class Point
 {
     // z is floor index (from 0 to 5)
-    constructor(public x: number, public y: number, public z: number, public tags: string = null) {
+    constructor(public x: number, public y: number, public z: number, public tags: string = "") {
     }
 
     // equals(p: Point): boolean {

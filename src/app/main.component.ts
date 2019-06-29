@@ -17,7 +17,6 @@ const INFO_HEIGHT = 30;
     styles: [`
         #info {
             height: 40px;
-           
         }
         #scrollBox {
             width: 100%;
@@ -26,7 +25,7 @@ const INFO_HEIGHT = 30;
         }
     `],
     template: `
-        <div (keydown)="this_keydown($event)" tabindex="1">
+        <div (keydown)="this_keydown($event)" >
 
             <dash (onScaleChanged)="dash_Scaled($event)"
                   (onChanged)="dash_FloorChanged()"></dash>
@@ -36,8 +35,8 @@ const INFO_HEIGHT = 30;
             </div>
             
 
-            <div id="scrollBox" (scroll)="this_scroll($event)">
-                <canvas id="canvas" (mousemove)="this_mousemove($event)" (mousedown)="this_mousedown($event)"></canvas>
+            <div id="scrollBox" (scroll)="this_scroll($event)" tabindex="1">
+                <canvas id="canvas" (mousemove)="this_mousemove($event)" (mousedown)="this_mousedown($event)" ></canvas>
             </div>
 
             <img id="floor1" [src]="'assets/floors/1ed.svg'" (load)="init()" hidden alt="floor1"/>
@@ -62,6 +61,7 @@ export class MainComponent
     ctx: CanvasRenderingContext2D;
     info: string = "";
     service: EditorService;
+    private lastSelPoint: Point;
 
 
     constructor(editorService: EditorService){
@@ -80,6 +80,7 @@ export class MainComponent
         this.scrollBox = document.getElementById("scrollBox");
         this.scrollBox.style.height = `${screen.height - DASH_HEIGHT - INFO_HEIGHT}px`;
         this.redraw();
+        this.scrollBox.focus();
     }
 
 
@@ -102,8 +103,11 @@ export class MainComponent
         this.ctx.lineWidth = 0.5;
 
         for (let p of this.service.points.filter(p => p.z == fli )) {
-            this.ctx.fillRect(p.x * scl - 0.5, p.y * scl - 0.5, 1, 1 );
-            this.ctx.strokeRect((p.x - 1) * scl, (p.y - 1) * scl, 2 * scl, 2 * scl );
+            //this.ctx.fillRect(p.x * scl - 0.5, p.y * scl - 0.5, 1, 1 );  // center
+            if (p.tags == "")
+                this.ctx.strokeRect((p.x - 1) * scl, (p.y - 1) * scl, 2 * scl, 2 * scl );
+            else
+                this.ctx.fillRect((p.x - 1) * scl, (p.y - 1) * scl, 2 * scl, 2 * scl );
         }
 
 
@@ -181,6 +185,7 @@ export class MainComponent
         let near: Point = this.service.nearPointTo(x, y, fli);
         if (near) {
             // near point exists
+            this.lastSelPoint =  this.service.selPoint;
             this.service.selPoint = near;
             this.dash.tags = near.tags;
             this.info = `Just select point (${x},${y})`;
@@ -219,6 +224,7 @@ export class MainComponent
         }
     }
 
+
     this_keydown(e: KeyboardEvent) {
         const key = e.key.toLowerCase();
 
@@ -240,7 +246,18 @@ export class MainComponent
             this.redraw();
             return;
         }
-        // switch mode
+        if (key == "x") {
+            if (this.lastSelPoint && this.service.selPoint) {
+                var x = this.lastSelPoint.x;
+                var y = this.service.selPoint.y;
+                var z = this.dash.floorIndex;
+                this.service.addPoint(new Point(x, y, z));
+                this.redraw();
+            }
+            return;
+        }
+
+            // switch mode
         if (key == "n") {
             this.service.selPoint = null;
             this.service.selEdge = null;
@@ -258,8 +275,6 @@ export class MainComponent
             this.redraw();
         }
      }
-
-
 
     // child's event handlers ///////////////////////
 

@@ -19,7 +19,8 @@ export class EditorService {
         this.points = [];
         for (let i = 0; i < obj.points.length; i++) {
             let p = obj.points[i];
-            this.points.push(new Point(p[0], p[1], p[2], obj.tags[i]));
+            let tag = obj.tags[i] == null ? "" : obj.tags[i];
+            this.points.push(new Point(p[0], p[1], p[2], tag));
         }
 
         // create edges
