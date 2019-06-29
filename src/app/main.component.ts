@@ -110,7 +110,6 @@ export class MainComponent
                 this.ctx.fillRect((p.x - 1) * scl, (p.y - 1) * scl, 2 * scl, 2 * scl );
         }
 
-
         // draw edges
         this.ctx.beginPath();
         for (let e of this.service.edges.filter(e => e.a.z == fli )) {
@@ -295,6 +294,5 @@ export class MainComponent
 
 }
 
-//todo: separate L-mode  (add, delete ladder)
 
-//todo: dashboard appearance
+//todo: point's props edit

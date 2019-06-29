@@ -22,12 +22,13 @@ const SCALE_FACTOR = 1.2;
             padding-left: 20px;
             height: 50px;
             background-color: darkorange;
-            margin: 0;
+            
         }
         #mode {
-            font-size: 40px;
+            font-size:40px;
             margin: 0 10px 0 10px;
             text-align: center;
+            vertical-align: top;
         }
         mat-form-field, button, textarea {
             width: 50px;
@@ -45,12 +46,12 @@ const SCALE_FACTOR = 1.2;
         
         textarea {
              width: 100px;
-             z-index: -100;
         }
 
-        #tags {
+        #tags, #coords {
             width: 120px;
-            margin-left: 20px;
+            height: 25px;
+
         }
 
     `],
@@ -73,7 +74,19 @@ const SCALE_FACTOR = 1.2;
             <textarea id="clip"></textarea>
             <button mat-stroked-button (click)="importData()">Import</button>
 
-            <input id="tags" [(ngModel)]="tags"  />
+            <table style="display:inline-block; margin-left: 20px;">
+                <tr>
+                    <td>
+                        <input id="coords" [(ngModel)]="tags"  />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input id="tags" [(ngModel)]="tags"  />
+                    </td>
+                </tr>
+
+            </table>
             <button (click)="saveSelTags()">Save</button>
             
         </div>`
