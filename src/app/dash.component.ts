@@ -67,9 +67,9 @@ const SCALE_FACTOR = 1.2;
 
             <button mat-stroked-button (click)="scaleChange(true)">+</button>
             <button mat-stroked-button (click)="scaleChange(false)">-</button>
-            
-            <span id="mode" title={{mode_title}} >{{mode.toUpperCase()}}</span>
-            
+
+            <span id="mode" title={{mode_title}}>{{mode.toUpperCase()}}</span>
+
             <button mat-stroked-button (click)="exportData()">Export</button>
             <textarea id="clip"></textarea>
             <button mat-stroked-button (click)="importData()">Import</button>
@@ -77,18 +77,18 @@ const SCALE_FACTOR = 1.2;
             <table style="display:inline-block; margin-left: 20px;">
                 <tr>
                     <td>
-                        <input id="coords" [(ngModel)]="tags"  />
+                        <input id="coords" [(ngModel)]="coords"/>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <input id="tags" [(ngModel)]="tags"  />
+                        <input id="tags" [(ngModel)]="tags" (keydown)="tags_keydown($event)"/>
                     </td>
                 </tr>
 
             </table>
-            <button (click)="saveSelTags()">Save</button>
-            
+            <button (click)="saveSelPointProps()">Save</button>
+
         </div>`
 
 })
@@ -105,6 +105,7 @@ V-vertical points
 E-edges`;
     floorIndex = 0;
     tags: string = "";
+    coords: string = "";
 
     service: EditorService;
 
@@ -143,12 +144,22 @@ E-edges`;
     }
 
 
-    saveSelTags() {
+    saveSelPointProps() {
         if (this.service.selPoint) {
-            this.service.selPoint.tags = this.tags;
+            this.service.selPoint.tags = this.tags.trim();
+            let ss = this.coords.trim().split(',');
+            this.service.selPoint.x = +ss[0];
+            this.service.selPoint.y = +ss[1];
+            this.onChanged.emit();
         }
     }
 
+    tags_keydown(e: KeyboardEvent) {
+        if (e.key == "Enter" && this.service.selPoint) {
+            this.service.selPoint.tags = this.tags.trim();
+            this.onChanged.emit();
+        }
+    }
 }
 
 

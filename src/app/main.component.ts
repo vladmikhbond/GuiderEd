@@ -25,18 +25,18 @@ const INFO_HEIGHT = 30;
         }
     `],
     template: `
-        <div (keydown)="this_keydown($event)" >
+        <div (keydown)="this_keydown($event)">
 
             <dash (onScaleChanged)="dash_Scaled($event)"
-                  (onChanged)="dash_FloorChanged()"></dash>
+                  (onChanged)="dash_Changed()"></dash>
 
             <div>
-                <span id="info">{{info}}</span>    
+                <span id="info">{{info}}</span>
             </div>
-            
+
 
             <div id="scrollBox" (scroll)="this_scroll($event)" tabindex="1">
-                <canvas id="canvas" (mousemove)="this_mousemove($event)" (mousedown)="this_mousedown($event)" ></canvas>
+                <canvas id="canvas" (mousemove)="this_mousemove($event)" (mousedown)="this_mousedown($event)"></canvas>
             </div>
 
             <img id="floor1" [src]="'assets/floors/1ed.svg'" (load)="init()" hidden alt="floor1"/>
@@ -187,7 +187,13 @@ export class MainComponent
             this.lastSelPoint =  this.service.selPoint;
             this.service.selPoint = near;
             this.dash.tags = near.tags;
-            this.info = `Just select point (${x},${y})`;
+            this.dash.coords = `${near.x} , ${near.y}`;
+
+             setTimeout(() => document.getElementById("tags").focus(), 100);
+
+
+
+            this.info = `Select point`;
         } else {
             // a new point
             let sel = this.service.selPoint;
@@ -285,8 +291,10 @@ export class MainComponent
         this.redraw();
     }
 
-    dash_FloorChanged() {
-        this.service.selPoint = null;
+    dash_Changed() {
+        if (this.service.selPoint && this.service.selPoint.z != this.dash.floorIndex) {
+            this.service.selPoint = null;
+        }
         this.redraw();
         this.info = `Floor changed to ${this.dash.floorIndex + 1}`;
     }
@@ -295,4 +303,6 @@ export class MainComponent
 }
 
 
-//todo: point's props edit
+//todo: focus
+//todo: help
+
