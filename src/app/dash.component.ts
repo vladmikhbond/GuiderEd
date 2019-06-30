@@ -22,7 +22,7 @@ const SCALE_FACTOR = 1.2;
             padding-left: 20px;
             height: 50px;
             background-color: darkorange;
-            
+            font-size: 16px;
         }
         #mode {
             font-size:40px;
@@ -40,8 +40,9 @@ const SCALE_FACTOR = 1.2;
             padding: 2px;
         }
 
-        mat-form-field{
+        mat-form-field {
             font-size: 14px;
+            font-weight: bold;
         }
         
         textarea {
@@ -51,7 +52,10 @@ const SCALE_FACTOR = 1.2;
         #tags, #coords {
             width: 120px;
             height: 25px;
-
+        }
+        .large-letter {
+            font-size: 24px;
+            font-weight: bold;
         }
 
     `],
@@ -65,14 +69,14 @@ const SCALE_FACTOR = 1.2;
                 </mat-select>
             </mat-form-field>
 
-            <button mat-stroked-button (click)="scaleChange(true)">+</button>
-            <button mat-stroked-button (click)="scaleChange(false)">-</button>
+            <button class="large-letter" (click)="scaleChange(true)">+</button>
+            <button class="large-letter" (click)="scaleChange(false)">-</button>
 
             <span id="mode" title={{mode_title}}>{{mode.toUpperCase()}}</span>
 
-            <button mat-stroked-button (click)="exportData()">Export</button>
+            <button  (click)="exportData()">Export</button>
             <textarea id="clip"></textarea>
-            <button mat-stroked-button (click)="importData()">Import</button>
+            <button  (click)="importData()">Import</button>
 
             <table style="display:inline-block; margin-left: 20px;">
                 <tr>
