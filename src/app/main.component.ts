@@ -163,8 +163,8 @@ export class MainComponent
         let x = Math.round(e.offsetX / this.dash.scale);
         let y = Math.round(e.offsetY / this.dash.scale);
         switch(this.dash.mode) {
-            case 'h': case 'v':
-                this.this_mousedown_hv(x, y, this.dash.mode);
+            case 'h': case 'v': case 't':
+                this.this_mousedown_hvt(x, y, this.dash.mode);
                 break;
             case 'l':
                 this.this_mousedown_l(x, y);
@@ -172,7 +172,7 @@ export class MainComponent
             case 'e':
                 this.this_mousedown_e(x, y);
                 break;
-        }
+         }
         this.redraw();
     }
 
@@ -184,7 +184,7 @@ export class MainComponent
         }
     }
 
-    private this_mousedown_hv(x: number, y: number, mode: string) {
+    private this_mousedown_hvt(x: number, y: number, mode: string) {
         let flid = this.dash.floorIndex;
         let near: Point = this.service.nearPointTo(x, y, flid);
         if (near) {
@@ -194,12 +194,13 @@ export class MainComponent
             this.dash.tags = near.tags;
             this.dash.coords = `${near.x} , ${near.y}`;
 
-             setTimeout(() => document.getElementById("tags").focus(), 100);
-
-
-
+            setTimeout(() => document.getElementById("tags").focus(), 100);
             this.info = `Select point`;
         } else {
+            // not add new point if mode == 't'
+            if (mode == 't')
+                return;
+
             // a new point
             let sel = this.service.selPoint;
             // sel point is on another floor
@@ -276,12 +277,14 @@ export class MainComponent
             this.scrollBox.style.cursor = "text";
         }  else if (key == "v") {
             this.scrollBox.style.cursor = "vertical-text";
+        } else if (key == "t") {
+            this.scrollBox.style.cursor = "default";
         } else { // l e
             this.scrollBox.style.cursor = "crosshair";
         }
 
         // switch mode
-        if ("hlevn".indexOf(key) != -1) {
+        if ("hlevnt".indexOf(key) != -1) {
             this.dash.mode = key;
             this.redraw();
         }
@@ -308,7 +311,6 @@ export class MainComponent
 }
 
 
-
 //todo: help
-//todo: t-mode - only select points
+
 

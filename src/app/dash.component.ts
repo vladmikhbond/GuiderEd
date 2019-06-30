@@ -72,7 +72,7 @@ const SCALE_FACTOR = 1.2;
             <button class="large-letter" (click)="scaleChange(true)">+</button>
             <button class="large-letter" (click)="scaleChange(false)">-</button>
 
-            <span id="mode" title="N-neutral\nL-ladders\nH-horizontal points\nV-vertical points\nE-edges">
+            <span id="mode" title="N-neutral\nL-ladders\nH-horizontal points\nV-vertical points\nE-edges\nT-tags">
                 {{mode.toUpperCase()}}
             </span>
 
