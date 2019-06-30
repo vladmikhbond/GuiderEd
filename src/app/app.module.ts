@@ -7,14 +7,14 @@ import {AppComponent}   from './app.component';
 import {MainComponent} from "./main.component";
 import {DashComponent} from "./dash.component";
 
-import {EditorService} from './data/editor.service';
+import {DataService} from './data/dataService';
 import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
     imports: [BrowserModule, BrowserAnimationsModule, MatButtonModule, MatSelectModule, FormsModule],
     declarations: [AppComponent, MainComponent, DashComponent],
-    providers: [EditorService],
+    providers: [DataService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

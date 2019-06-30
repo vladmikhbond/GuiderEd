@@ -1,6 +1,6 @@
 ﻿import {Component,  ViewChild} from '@angular/core';
 import {Point} from './data/data.types';
-import {EditorService} from "./data/editor.service";
+import {DataService} from "./data/dataService";
 import {DashComponent} from './dash.component';
 
 const DASH_HEIGHT = 50;
@@ -39,7 +39,7 @@ const INFO_HEIGHT = 30;
                 <canvas id="canvas" (mousemove)="this_mousemove($event)" (mousedown)="this_mousedown($event)"></canvas>
             </div>
 
-            <img id="floor1" [src]="'assets/floors/1ed.svg'" (load)="init()" hidden alt="floor1"/>
+            <img id="floor1" [src]="'assets/floors/1.svg'" (load)="init()" hidden alt="floor1"/>
             <img id="floor2" [src]="'assets/floors/2.svg'" hidden alt="floor2"/>
             <img id="floor3" [src]="'assets/floors/3.svg'" hidden alt="floor3"/>
             <img id="floor4" [src]="'assets/floors/4.svg'" hidden alt="floor4"/>
@@ -58,14 +58,15 @@ export class MainComponent
     bgImages: HTMLImageElement[];
     scrollBox: HTMLElement;
     canvas: HTMLCanvasElement;
-    ctx: CanvasRenderingContext2D;
     info: string = "";
-    service: EditorService;
-    private lastSelPoint: Point;
+    service: DataService;
+
+    // previously selected point(for corner points only)
+    private prevSelPoint: Point;
 
 
-    constructor(editorService: EditorService){
-        this.service = editorService;
+    constructor(service: DataService){
+        this.service = service;
     }
 
 
@@ -73,8 +74,8 @@ export class MainComponent
         // fill array of images
         this.bgImages = [];
         for (let i = 1; i <= 6; i++ ) {
-            let im = <HTMLImageElement>document.getElementById("floor" + i);
-            this.bgImages.push(im);
+            let img = <HTMLImageElement>document.getElementById("floor" + i);
+            this.bgImages.push(img);
         }
         // set scrollBox size
         this.scrollBox = document.getElementById("scrollBox");
@@ -85,57 +86,61 @@ export class MainComponent
 
 
     redraw(): void {
-        let fli = this.dash.floorIndex;
-        let img = this.bgImages[fli];
+        let flid = this.dash.floorIndex;
+        let img = this.bgImages[flid];
         let scl = this.dash.scale;
+
         // canvas size
         this.canvas = <HTMLCanvasElement>document.getElementById("canvas");
         this.canvas.width = img.width * scl;
         this.canvas.height = img.height * scl;
 
         // draw back image
-        this.ctx = this.canvas.getContext("2d");
-        this.ctx.drawImage(img,
+        let ctx = this.canvas.getContext("2d");
+        ctx.drawImage(img,
             0, 0, img.width, img.height,
             0, 0, this.canvas.width, this.canvas.height);
 
         // draw points
-        this.ctx.lineWidth = 0.5;
-
-        for (let p of this.service.points.filter(p => p.z == fli )) {
-            //this.ctx.fillRect(p.x * scl - 0.5, p.y * scl - 0.5, 1, 1 );  // center
-            if (p.tags == "")
-                this.ctx.strokeRect((p.x - 1) * scl, (p.y - 1) * scl, 2 * scl, 2 * scl );
-            else
-                this.ctx.fillRect((p.x - 1) * scl, (p.y - 1) * scl, 2 * scl, 2 * scl );
+        ctx.lineWidth = 0.5;
+        for (let p of this.service.points.filter(p => p.z == flid )) {
+            if (p.tags == "") {
+                ctx.strokeRect((p.x - 1) * scl, (p.y - 1) * scl, 2 * scl, 2 * scl);
+            } else if (p.tags == "L") {
+                ctx.fillStyle = "orange";
+                ctx.fillRect((p.x - 1) * scl, (p.y - 1) * scl, 2 * scl, 2 * scl);
+            } else {
+                ctx.fillStyle = "black";
+                ctx.fillRect((p.x - 1) * scl, (p.y - 1) * scl, 2 * scl, 2 * scl);
+            }
         }
 
         // draw edges
-        this.ctx.beginPath();
-        for (let e of this.service.edges.filter(e => e.a.z == fli )) {
-            this.ctx.moveTo(e.a.x * scl, e.a.y * scl);
-            this.ctx.lineTo(e.b.x * scl, e.b.y * scl);
+        ctx.beginPath();
+        for (let e of this.service.edges.filter(e => e.a.z == flid )) {
+            ctx.moveTo(e.a.x * scl, e.a.y * scl);
+            ctx.lineTo(e.b.x * scl, e.b.y * scl);
         }
-        this.ctx.stroke();
+        ctx.stroke();
 
         // draw selected point
         let selP = this.service.selPoint;
-        if (selP && selP.z == fli) {
-            this.ctx.strokeStyle = 'red';
-            this.ctx.lineWidth = 1;
-            this.ctx.strokeRect(
+        if (selP && selP.z == flid) {
+            ctx.strokeStyle = 'red';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(
                 (selP.x - 2) * scl,
                 (selP.y - 2) * scl, 4 * scl, 4 * scl);
         }
         // draw selected edge
         let selE = this.service.selEdge;
-        if (selE && selE.a.z == fli) {
-            this.ctx.strokeStyle = 'red';
-            this.ctx.lineWidth = 1;
-            this.ctx.beginPath();
-            this.ctx.moveTo(selE.a.x * scl, selE.a.y * scl);
-            this.ctx.lineTo(selE.b.x * scl, selE.b.y * scl);
-            this.ctx.stroke();
+        if (selE && selE.a.z == flid) {
+            ctx.strokeStyle = 'red';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(selE.a.x * scl, selE.a.y * scl);
+            ctx.lineTo(selE.b.x * scl, selE.b.y * scl);
+            ctx.stroke();
         }
     }
 
@@ -172,19 +177,19 @@ export class MainComponent
     }
 
     private this_mousedown_e(x: number, y: number) {
-        let fli = this.dash.floorIndex;
-        if (!this.service.trySelectEdge(x, y, this.dash.scale)) {
+        let flid = this.dash.floorIndex;
+        if (!this.service.trySelectEdge(x, y, flid)) {
             // new edge
-            this.service.tryCreateEdge(x, y, fli)
+            this.service.tryCreateEdge(x, y, flid)
         }
     }
 
     private this_mousedown_hv(x: number, y: number, mode: string) {
-        let fli = this.dash.floorIndex;
-        let near: Point = this.service.nearPointTo(x, y, fli);
+        let flid = this.dash.floorIndex;
+        let near: Point = this.service.nearPointTo(x, y, flid);
         if (near) {
             // near point exists
-            this.lastSelPoint =  this.service.selPoint;
+            this.prevSelPoint =  this.service.selPoint;
             this.service.selPoint = near;
             this.dash.tags = near.tags;
             this.dash.coords = `${near.x} , ${near.y}`;
@@ -198,18 +203,18 @@ export class MainComponent
             // a new point
             let sel = this.service.selPoint;
             // sel point is on another floor
-            if (sel && sel.z != fli) {
+            if (sel && sel.z != flid) {
                 sel = null;
             }
-            if (sel && sel.z == fli) {
+            if (sel && sel.z == flid) {
                 // sel point is on the floor
                 if (mode == 'h')
-                    this.service.addPoint(new Point(x, sel.y, fli));
+                    this.service.addPoint(new Point(x, sel.y, flid));
                 if (mode == 'v')
-                    this.service.addPoint(new Point(sel.x, y, fli));
+                    this.service.addPoint(new Point(sel.x, y, flid));
             } else {
                 // no sel point on the floor
-                this.service.addPoint(new Point(x, y, fli));
+                this.service.addPoint(new Point(x, y, flid));
             }
          }
     }
@@ -252,17 +257,17 @@ export class MainComponent
             return;
         }
         if (key == "x") {
-            if (this.lastSelPoint && this.service.selPoint) {
-                var x = this.lastSelPoint.x;
-                var y = this.service.selPoint.y;
-                var z = this.dash.floorIndex;
+            if (this.prevSelPoint && this.service.selPoint) {
+                let x = this.prevSelPoint.x;
+                let y = this.service.selPoint.y;
+                let z = this.dash.floorIndex;
                 this.service.addPoint(new Point(x, y, z));
                 this.redraw();
             }
             return;
         }
 
-            // switch mode
+        // switch mode
         if (key == "n") {
             this.service.selPoint = null;
             this.service.selEdge = null;
@@ -271,10 +276,11 @@ export class MainComponent
             this.scrollBox.style.cursor = "text";
         }  else if (key == "v") {
             this.scrollBox.style.cursor = "vertical-text";
-        } else {
+        } else { // l e
             this.scrollBox.style.cursor = "crosshair";
         }
 
+        // switch mode
         if ("hlevn".indexOf(key) != -1) {
             this.dash.mode = key;
             this.redraw();
@@ -292,17 +298,17 @@ export class MainComponent
     }
 
     dash_Changed() {
+        // clear selected pointed
         if (this.service.selPoint && this.service.selPoint.z != this.dash.floorIndex) {
             this.service.selPoint = null;
         }
         this.redraw();
-        this.info = `Floor changed to ${this.dash.floorIndex + 1}`;
     }
-
 
 }
 
 
-//todo: focus
+
 //todo: help
+//todo: t-mode - only select points
 

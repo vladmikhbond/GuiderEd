@@ -1,7 +1,9 @@
 import {Point, Edge} from "./data.types";
 import {obj} from "./data";
 
-export class EditorService {
+const EPSILON = 2;
+
+export class DataService {
 
     points: Point[];
     edges: Edge[];
@@ -77,7 +79,7 @@ export class EditorService {
 
 
     nearPointTo(x: number, y: number, z: number): Point {
-        return this.points.find(p => Math.abs(p.x - x) < 3 && Math.abs(p.y - y) < 3 && p.z == z);
+        return this.points.find(p => Math.abs(p.x - x) < EPSILON && Math.abs(p.y - y) < EPSILON && p.z == z);
     }
 
     //////////////////////// ladders //////////////////////
@@ -114,14 +116,16 @@ export class EditorService {
         this.selEdge = newEdge;
     }
 
-    trySelectEdge(x: number, y: number, scale: number): boolean {
-        let idx = this.edges.findIndex(e => e.hasPoint(x, y, scale));
+    trySelectEdge(x: number, y: number, z: number): boolean {
+        let idx = this.edges.filter(e => e.a.z == z && e.b.z == z) // all edges on z-floor
+            .findIndex(e => e.hasPoint(x, y));
         if (idx != -1) {
             this.selEdge = this.edges[idx];
             return true;
         }
         return false;
     }
+
 
     deleteSelectedEdge() {
         if (this.selEdge) {

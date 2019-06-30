@@ -25,11 +25,12 @@ export class Edge
         return this.a.z == this.b.z && this.a.x == this.b.x;
     }
 
-    hasPoint(x: number, y: number, scale: number): boolean {
+    // Check if a point (x, y) belong or close to this edge
+    hasPoint(x: number, y: number): boolean {
         if (this.isHor)
-            return (this.a.x < x && x < this.b.x || this.a.x > x && x > this.b.x) && Math.abs(this.a.y - y) < 2 * scale;
+            return (this.a.x < x && x < this.b.x || this.a.x > x && x > this.b.x) && Math.abs(this.a.y - y) < 2;
         if (this.isVer)
-            return (this.a.y < y && y < this.b.y || this.a.y > y && y > this.b.y) && Math.abs(this.a.x - x) < 2 * scale;
+            return (this.a.y < y && y < this.b.y || this.a.y > y && y > this.b.y) && Math.abs(this.a.x - x) < 2;
         return false;
     }
 

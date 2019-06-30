@@ -1,5 +1,5 @@
 ﻿import { Component, EventEmitter, Output} from '@angular/core';
-import {EditorService} from "./data/editor.service";
+import {DataService} from "./data/dataService";
 
 const SCALE_FACTOR = 1.2;
 
@@ -72,7 +72,9 @@ const SCALE_FACTOR = 1.2;
             <button class="large-letter" (click)="scaleChange(true)">+</button>
             <button class="large-letter" (click)="scaleChange(false)">-</button>
 
-            <span id="mode" title={{mode_title}}>{{mode.toUpperCase()}}</span>
+            <span id="mode" title="N-neutral\nL-ladders\nH-horizontal points\nV-vertical points\nE-edges">
+                {{mode.toUpperCase()}}
+            </span>
 
             <button  (click)="exportData()">Export</button>
             <textarea id="clip"></textarea>
@@ -101,26 +103,20 @@ export class DashComponent {
 
     scale = SCALE_FACTOR ** 4; // initial scale
     mode = 'n';
-    mode_title =
-`N-neutral
-L-ladders
-H-horizontal points
-V-vertical points
-E-edges`;
     floorIndex = 0;
     tags: string = "";
     coords: string = "";
 
-    service: EditorService;
+    service: DataService;
 
-    constructor(editorService: EditorService){
-        this.service = editorService;
+    constructor(service: DataService){
+        this.service = service;
     }
 
     @Output()
     onScaleChanged = new EventEmitter<number>();
     @Output()
-    onChanged = new EventEmitter();   // signal to redraw the map
+    onChanged = new EventEmitter();   // just signal to redraw the map
 
     scaleChange(increased: boolean) {
         let k = increased ? SCALE_FACTOR : 1 / SCALE_FACTOR;
