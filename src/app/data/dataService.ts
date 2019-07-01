@@ -1,5 +1,5 @@
 import {Point, Edge} from "./data.types";
-import {obj} from "./data";
+import {data} from "./data";
 
 const EPSILON = 2;
 
@@ -12,7 +12,7 @@ export class DataService {
     selEdge: Edge = null;
 
     constructor() {
-         this.parse(obj);
+         this.parse(data);
     }
 
     parse(obj: any) {

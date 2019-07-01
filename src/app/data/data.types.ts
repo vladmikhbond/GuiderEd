@@ -4,10 +4,6 @@ export class Point
     // z is floor index (from 0 to 5)
     constructor(public x: number, public y: number, public z: number, public tags: string = "") {
     }
-
-    // equals(p: Point): boolean {
-    //     return this.x == p.x && this.y == p.y && this.z == p.z;
-    // }
 }
 
 export class Edge
@@ -33,12 +29,4 @@ export class Edge
             return (this.a.y < y && y < this.b.y || this.a.y > y && y > this.b.y) && Math.abs(this.a.x - x) < 2;
         return false;
     }
-
-    // get len(): number {
-    //     if (this.a.x !== this.b.x)
-    //         return Math.abs(this.a.x - this.b.x);
-    //     if (this.a.y !== this.b.y)
-    //         return Math.abs(this.a.y - this.b.y);
-    //     return Math.abs(this.a.z - this.b.z) * 10;
-    // }
 }
