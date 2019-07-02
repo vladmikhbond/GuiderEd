@@ -77,7 +77,8 @@ export class DataService {
         }
     }
 
-
+    // Find a point near to given place.
+    //
     nearPointTo(x: number, y: number, z: number): Point {
         return this.points.find(p => Math.abs(p.x - x) < EPSILON && Math.abs(p.y - y) < EPSILON && p.z == z);
     }
@@ -102,7 +103,7 @@ export class DataService {
     }
 
     deleteSelectedLadder() {
-        if (this.selPoint && this.selPoint.tags.startsWith("L") ) {
+        if (this.selPoint && this.selPoint.tags == "L" ) {
             this.points.filter(p => p.x == this.selPoint.x && p.y == this.selPoint.y)
                 .forEach(p => this.deletePoint(p));
             this.selPoint = null;
@@ -117,10 +118,10 @@ export class DataService {
     }
 
     trySelectEdge(x: number, y: number, z: number): boolean {
-        let idx = this.edges.filter(e => e.a.z == z && e.b.z == z) // all edges on z-floor
-            .findIndex(e => e.hasPoint(x, y));
+        let oneFloorEdges = this.edges.filter(e => e.a.z == z && e.b.z == z)   // all edges on z-floor
+        let idx = oneFloorEdges.findIndex(e => e.hasPoint(x, y));
         if (idx != -1) {
-            this.selEdge = this.edges[idx];
+            this.selEdge = oneFloorEdges[idx];
             return true;
         }
         return false;

@@ -25,7 +25,7 @@ const INFO_HEIGHT = 30;
         }
     `],
     template: `
-        <div (keydown)="this_keydown($event)">
+        <div (keydown)="this_keydown($event)"  tabindex="1">
 
             <dash (onScaleChanged)="dash_Scaled($event)"
                   (onChanged)="dash_Changed()"></dash>
