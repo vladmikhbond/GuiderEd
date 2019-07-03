@@ -144,6 +144,25 @@ export class MainComponent
         }
     }
 
+    private showEdges() {
+        //let flid = this.dash.floorIndex;
+        let img = this.bgImages[0];
+        // .filter(e => e.a.z == flid )
+        let scl = this.dash.scale;
+        let ctx = this.canvas.getContext("2d");
+        ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 1;
+
+        // draw edges
+        ctx.beginPath();
+        for (let e of this.service.edges) {
+            ctx.moveTo(e.a.x * scl, e.a.y * scl);
+            ctx.lineTo(e.b.x * scl, e.b.y * scl);
+        }
+        ctx.stroke();
+    }
+
 
     // this event handlers ///////////////////////
 
@@ -235,7 +254,6 @@ export class MainComponent
         }
     }
 
-
     this_keydown(e: KeyboardEvent) {
         const key = e.key.toLowerCase();
 
@@ -257,6 +275,7 @@ export class MainComponent
             this.redraw();
             return;
         }
+        // corner point
         if (key == "x") {
             if (this.prevSelPoint && this.service.selPoint) {
                 let x = this.prevSelPoint.x;
@@ -267,8 +286,13 @@ export class MainComponent
             }
             return;
         }
+        // graph test
+        if (key == "o") {
+             this.showEdges();
+            return;
+        }
 
-        // switch mode
+        // mode characters
         if (key == "n") {
             this.service.selPoint = null;
             this.service.selEdge = null;
