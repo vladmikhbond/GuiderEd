@@ -166,7 +166,8 @@ export class DataService {
 
     exportData() {
         let ps = this.points.map(p => [p.x, p.y, p.z] );
-        let ts = this.points.map(p => p.tags );
+        // with removing all whitespaces after comma
+        let ts = this.points.map(p => p.tags.replace(/,\s+/g, ',') );
         let es = this.edges.map(e => [e.a.x, e.a.y, e.a.z, e.b.x, e.b.y, e.b.z] );
         return JSON.stringify({"points": ps, "tags": ts, "edges": es});
     }
