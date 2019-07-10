@@ -43,9 +43,9 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="620.41297"
+     inkscape:cx="670.50063"
      inkscape:cy="311.36137"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer5"
      inkscape:document-units="px"
      showgrid="false"
      inkscape:window-width="2016"
@@ -64,7 +64,8 @@
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
-     fit-margin-bottom="0" />
+     fit-margin-bottom="0"
+     inkscape:pagecheckerboard="true" />
   <metadata
      id="metadata4695">
     <rdf:RDF>
@@ -73,19 +74,136 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
      inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="sub-base">
+    <path
+       style="display:inline;opacity:1;fill:#beead6;fill-opacity:1;stroke:#0000ea;stroke-width:0.93888837;stroke-opacity:1;shape-rendering:crispEdges;enable-background:new"
+       d="M -134.22934,0.46944775 H 1122.0202 V 427.03192 H -134.22934 Z"
+       id="rect120"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375;enable-background:new"
+       x="259.1109"
+       y="6.5186486"
+       id="text1213"
+       transform="rotate(17.261351)"><tspan
+         sodipodi:role="line"
+         id="tspan1211"
+         x="259.1109"
+         y="6.5186486"
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">2 этаж</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375;shape-rendering:crispEdges;enable-background:new"
+       x="526.81836"
+       y="69.542374"
+       id="text1213-4"
+       transform="rotate(17.261351)"><tspan
+         sodipodi:role="line"
+         id="tspan1211-8"
+         x="526.81836"
+         y="69.542374"
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">2 этаж</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375;shape-rendering:crispEdges;enable-background:new"
+       x="265.42319"
+       y="135.05708"
+       id="text1213-2"
+       transform="rotate(17.261351)"><tspan
+         sodipodi:role="line"
+         id="tspan1211-88"
+         x="265.42319"
+         y="135.05708"
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">2 этаж</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375;shape-rendering:crispEdges;enable-background:new"
+       x="47.371227"
+       y="96.786133"
+       id="text1213-9"
+       transform="rotate(17.261351)"><tspan
+         sodipodi:role="line"
+         id="tspan1211-81"
+         x="47.371227"
+         y="96.786133"
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">2 этаж</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375;shape-rendering:crispEdges;enable-background:new"
+       x="496.5979"
+       y="-90.904091"
+       id="text1213-5"
+       transform="rotate(17.261351)"><tspan
+         sodipodi:role="line"
+         id="tspan1211-2"
+         x="496.5979"
+         y="-90.904091"
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">2 этаж</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375;shape-rendering:crispEdges;enable-background:new"
+       x="793.94531"
+       y="-116.54088"
+       id="text1213-5-6"
+       transform="rotate(17.261351)"><tspan
+         sodipodi:role="line"
+         id="tspan1211-2-5"
+         x="793.94531"
+         y="-116.54088"
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">2 этаж</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375;shape-rendering:crispEdges;enable-background:new"
+       x="790.13965"
+       y="127.12531"
+       id="text1213-5-5"
+       transform="rotate(17.261351)"><tspan
+         sodipodi:role="line"
+         id="tspan1211-2-8"
+         x="790.13965"
+         y="127.12531"
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">2 этаж</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375;shape-rendering:crispEdges;enable-background:new"
+       x="413.96701"
+       y="237.13974"
+       id="text1213-5-8"
+       transform="rotate(17.261351)"><tspan
+         sodipodi:role="line"
+         id="tspan1211-2-9"
+         x="413.96701"
+         y="237.13974"
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">2 этаж</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375;shape-rendering:crispEdges;enable-background:new"
+       x="175.73743"
+       y="329.81631"
+       id="text1213-5-67"
+       transform="rotate(17.261351)"><tspan
+         sodipodi:role="line"
+         id="tspan1211-2-0"
+         x="175.73743"
+         y="329.81631"
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">2 этаж</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="base"
      style="display:inline"
-     transform="translate(-139.637,0.77946448)"
-     sodipodi:insensitive="true">
+     transform="translate(-139.637,0.77946448)">
     <path
-       style="display:inline;opacity:0.95999995;fill:#cfe9d4;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:57.61457443;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.72727275;stroke-dasharray:none;stroke-opacity:0"
+       style="display:none;opacity:0.95999995;fill:#cfe9d4;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:57.61457443;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.72727275;stroke-dasharray:none;stroke-opacity:0"
        d="M -1475.4673,-753.37388 H 4797.4824 V 2379.318 h -6272.9497 z"
        id="path4963-2"
        inkscape:connector-curvature="0" />
@@ -108,24 +226,13 @@
        id="path4965-8"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccccccccccc" />
-    <path
-       style="display:inline;opacity:0.95999995;fill:#cfe9d4;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:3.2288487;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.72727275;stroke-dasharray:none;stroke-opacity:0"
-       d="m 55.192896,282.28398 h 70.748334 v 107.0044 H 55.192896 Z"
-       id="path4963-0"
-       inkscape:connector-curvature="0" />
-    <path
-       style="display:inline;opacity:0.51799999;fill:none;stroke:#0000ea;stroke-width:0.93888837;stroke-opacity:1;shape-rendering:crispEdges;enable-background:new"
-       d="M 5.4076664,-0.31002029 H 1261.6575 V 426.25245 H 5.4076664 Z"
-       id="rect120"
-       inkscape:connector-curvature="0" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer1"
      inkscape:label="walls1"
      style="display:inline"
-     transform="translate(-139.637,0.77946448)"
-     sodipodi:insensitive="true">
+     transform="translate(-139.637,0.77946448)">
     <path
        style="display:inline;fill:#fefdf6;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.72727275;stroke-dasharray:none;stroke-opacity:1"
        d="m 791.15054,287.60784 0.0382,-4.05076 V 131.94099 h 154.89843 v 94.68454 l 164.61993,-0.5 v 62.35731 c -70.9233,0.0623 -146.94432,0.25 -215.9263,0.25 h -63.01836 l -29.11192,0.25"
@@ -257,10 +364,16 @@
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccccc" />
     <path
-       style="fill:#cfe9d4;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="fill:#bee9d4;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="M 933.625,198.625 H 804.96875 v 32.65625 H 933.5 V 198.625 Z"
        id="path4877"
        inkscape:connector-curvature="0" />
+    <path
+       style="display:inline;opacity:1;fill:#beead6;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:3.2288487;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.72727275;stroke-dasharray:none;stroke-opacity:0;enable-background:new"
+       d="m 55.619563,295.97302 h 70.748327 v 90.12941 H 55.619563 Z"
+       id="path4963-26"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
   </g>
   <g
      inkscape:groupmode="layer"
