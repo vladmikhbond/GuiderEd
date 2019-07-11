@@ -183,5 +183,18 @@ export class DataService {
         }
     }
 
+    // Select neighbor of selPoint without tag.
+    selectNextPoint() {
+        const sel = this.selPoint;
+        let ps = this.edges.filter(e => e.a == sel && !e.b.tags).map(e => e.b);
+        if (ps.length > 0) {
+            this.selPoint = ps[0];
+            return;
+        }
+        ps = this.edges.filter(e => e.b == sel && !e.a.tags).map(e => e.a);
+        if (ps.length > 0) {
+            this.selPoint = ps[0];
+        }
+    }
 }
 

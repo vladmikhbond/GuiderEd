@@ -157,6 +157,8 @@ export class DashComponent {
     tags_keydown(e: KeyboardEvent) {
         if (e.key == "Enter" && this.service.selPoint) {
             this.service.selPoint.tags = this.tags.trim();
+            this.service.selectNextPoint();
+
             this.onChanged.emit();
         }
     }
