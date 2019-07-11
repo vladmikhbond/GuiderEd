@@ -43,9 +43,9 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.0000001"
-     inkscape:cx="482.7186"
+     inkscape:cx="311.71862"
      inkscape:cy="213.17465"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer6"
      inkscape:document-units="px"
      showgrid="false"
      inkscape:window-width="2016"
@@ -79,15 +79,164 @@
   </metadata>
   <g
      inkscape:groupmode="layer"
+     id="layer6"
+     inkscape:label="sub-base">
+    <path
+       style="display:inline;opacity:1;fill:#5aead6;fill-opacity:1;stroke:#0000ea;stroke-width:0.93888837;stroke-opacity:1;shape-rendering:crispEdges;enable-background:new"
+       d="M -134.2293,0.46940581 H 1122.0206 V 427.03193 H -134.2293 Z"
+       id="rect120"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375;shape-rendering:crispEdges;enable-background:new"
+       x="-91.670212"
+       y="90.832352"
+       id="text1213-0"
+       transform="rotate(17.261351)"><tspan
+         sodipodi:role="line"
+         id="tspan1211-0"
+         x="-91.670212"
+         y="90.832352"
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">6 этаж</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375;shape-rendering:crispEdges;enable-background:new"
+       x="137.66037"
+       y="25.600868"
+       id="text1213-0-9"
+       transform="rotate(17.26135)"><tspan
+         sodipodi:role="line"
+         id="tspan1211-0-4"
+         x="137.66037"
+         y="25.600868"
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">6 этаж</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375;shape-rendering:crispEdges;enable-background:new"
+       x="383.18344"
+       y="-46.762554"
+       id="text1213-0-7"
+       transform="rotate(17.26135)"><tspan
+         sodipodi:role="line"
+         id="tspan1211-0-2"
+         x="383.18344"
+         y="-46.762554"
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">6 этаж</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375;shape-rendering:crispEdges;enable-background:new"
+       x="648.12445"
+       y="-126.14131"
+       id="text1213-0-71"
+       transform="rotate(17.26135)"><tspan
+         sodipodi:role="line"
+         id="tspan1211-0-5"
+         x="648.12445"
+         y="-126.14131"
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">6 этаж</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375;shape-rendering:crispEdges;enable-background:new"
+       x="-58.138744"
+       y="204.66974"
+       id="text1213-0-5"
+       transform="rotate(17.26135)"><tspan
+         sodipodi:role="line"
+         id="tspan1211-0-3"
+         x="-58.138744"
+         y="204.66974"
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">6 этаж</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375;shape-rendering:crispEdges;enable-background:new"
+       x="171.19147"
+       y="139.43826"
+       id="text1213-0-9-4"
+       transform="rotate(17.26135)"><tspan
+         sodipodi:role="line"
+         id="tspan1211-0-4-0"
+         x="171.19147"
+         y="139.43826"
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">6 этаж</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375;shape-rendering:crispEdges;enable-background:new"
+       x="416.71512"
+       y="67.075096"
+       id="text1213-0-7-3"
+       transform="rotate(17.26135)"><tspan
+         sodipodi:role="line"
+         id="tspan1211-0-2-5"
+         x="416.71512"
+         y="67.075096"
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">6 этаж</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375;shape-rendering:crispEdges;enable-background:new"
+       x="681.65192"
+       y="-12.304503"
+       id="text1213-0-71-7"
+       transform="rotate(17.26135)"><tspan
+         sodipodi:role="line"
+         id="tspan1211-0-5-4"
+         x="681.65192"
+         y="-12.304503"
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">6 этаж</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375;shape-rendering:crispEdges;enable-background:new"
+       x="-18.854887"
+       y="327.93872"
+       id="text1213-0-75"
+       transform="rotate(17.26135)"><tspan
+         sodipodi:role="line"
+         id="tspan1211-0-8"
+         x="-18.854887"
+         y="327.93872"
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">6 этаж</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375;shape-rendering:crispEdges;enable-background:new"
+       x="210.47574"
+       y="262.70724"
+       id="text1213-0-9-6"
+       transform="rotate(17.26135)"><tspan
+         sodipodi:role="line"
+         id="tspan1211-0-4-7"
+         x="210.47574"
+         y="262.70724"
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">6 этаж</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375;shape-rendering:crispEdges;enable-background:new"
+       x="455.99884"
+       y="190.3438"
+       id="text1213-0-7-0"
+       transform="rotate(17.26135)"><tspan
+         sodipodi:role="line"
+         id="tspan1211-0-2-59"
+         x="455.99884"
+         y="190.3438"
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">6 этаж</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375;shape-rendering:crispEdges;enable-background:new"
+       x="720.93939"
+       y="110.9653"
+       id="text1213-0-71-72"
+       transform="rotate(17.26135)"><tspan
+         sodipodi:role="line"
+         id="tspan1211-0-5-7"
+         x="720.93939"
+         y="110.9653"
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">6 этаж</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="base"
      style="display:inline"
      transform="translate(-139.01996,1.1162786)">
-    <path
-       style="display:inline;opacity:1;fill:#5aead6;fill-opacity:1;stroke:#0000ea;stroke-width:0.93888837;stroke-opacity:1;shape-rendering:crispEdges;enable-background:new"
-       d="M 4.7906568,-0.64685279 H 1261.0405 V 425.91565 H 4.7906568 Z"
-       id="rect120"
-       inkscape:connector-curvature="0" />
     <path
        style="display:inline;fill:#fefdf6;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.72727275;stroke-dasharray:none;stroke-opacity:1"
        d="m 790.86972,289.50828 c 0.094,-20.59689 0.0382,-42.03844 0.0382,-62.6356 l 319.51838,-0.19046 v 62.35731 l -319.6816,0.5"
