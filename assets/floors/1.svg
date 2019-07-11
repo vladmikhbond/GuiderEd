@@ -107,9 +107,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.90509672"
-     inkscape:cx="449.0171"
-     inkscape:cy="145.31204"
+     inkscape:zoom="1.8101935"
+     inkscape:cx="209.13585"
+     inkscape:cy="253.37777"
      inkscape:current-layer="layer6"
      inkscape:document-units="px"
      showgrid="false"
@@ -154,15 +154,17 @@
   <g
      inkscape:groupmode="layer"
      id="layer6"
-     inkscape:label="sub-base">
+     inkscape:label="sub-base"
+     style="display:inline"
+     sodipodi:insensitive="true">
     <path
-       style="display:inline;opacity:1;fill:#d1ead6;fill-opacity:1;stroke:url(#meshgradient965);stroke-width:0.93888837;stroke-opacity:1;shape-rendering:crispEdges;enable-background:new"
+       style="display:inline;opacity:1;fill:#80b3ff;fill-opacity:1;stroke:url(#meshgradient965);stroke-width:0.93888837;stroke-opacity:1;shape-rendering:crispEdges;enable-background:new"
        d="M -134.59822,-2.7e-5 H 1121.6517 V 426.56247 H -134.59822 Z"
        id="rect120"
        inkscape:connector-curvature="0" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.07843138;stroke:none;stroke-width:0.9375;"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375"
        x="226.45332"
        y="-2.6413014"
        id="text1213"
@@ -171,10 +173,10 @@
          id="tspan1211"
          x="226.45332"
          y="-2.6413014"
-         style="fill:#000000;fill-opacity:0.07843138;stroke-width:0.9375;">1 этаж</tspan></text>
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">1 этаж</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.07843138;stroke:none;stroke-width:0.9375;enable-background:new;"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375;enable-background:new"
        x="168.4879"
        y="341.9682"
        id="text1213-8"
@@ -183,10 +185,10 @@
          id="tspan1211-5"
          x="168.4879"
          y="341.9682"
-         style="fill:#000000;fill-opacity:0.07843138;stroke-width:0.9375;">1 этаж</tspan></text>
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">1 этаж</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.07843138;stroke:none;stroke-width:0.9375;enable-background:new;"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375;enable-background:new"
        x="4.9006686"
        y="91.265564"
        id="text1213-0"
@@ -195,10 +197,10 @@
          id="tspan1211-0"
          x="4.9006686"
          y="91.265564"
-         style="fill:#000000;fill-opacity:0.07843138;stroke-width:0.9375;">1 этаж</tspan></text>
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">1 этаж</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.07843138;stroke:none;stroke-width:0.9375;enable-background:new;"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375;enable-background:new"
        x="523.22778"
        y="-75.215004"
        id="text1213-2"
@@ -207,10 +209,10 @@
          id="tspan1211-9"
          x="523.22778"
          y="-75.215004"
-         style="fill:#000000;fill-opacity:0.07843138;stroke-width:0.9375;">1 этаж</tspan></text>
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">1 этаж</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.07843138;stroke:none;stroke-width:0.9375;enable-background:new;"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375;enable-background:new"
        x="550.18689"
        y="69.485191"
        id="text1213-3"
@@ -219,10 +221,10 @@
          id="tspan1211-6"
          x="550.18689"
          y="69.485191"
-         style="fill:#000000;fill-opacity:0.07843138;stroke-width:0.9375;">1 этаж</tspan></text>
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">1 этаж</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.07843138;stroke:none;stroke-width:0.9375;enable-background:new;"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375;enable-background:new"
        x="319.75919"
        y="257.3942"
        id="text1213-9"
@@ -231,10 +233,10 @@
          id="tspan1211-8"
          x="319.75919"
          y="257.3942"
-         style="fill:#000000;fill-opacity:0.07843138;stroke-width:0.9375;">1 этаж</tspan></text>
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">1 этаж</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.07843138;stroke:none;stroke-width:0.9375;enable-background:new;"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375;enable-background:new"
        x="276.44095"
        y="109.93305"
        id="text1213-4"
@@ -243,10 +245,10 @@
          id="tspan1211-86"
          x="276.44095"
          y="109.93305"
-         style="fill:#000000;fill-opacity:0.07843138;stroke-width:0.9375;">1 этаж</tspan></text>
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">1 этаж</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.07843138;stroke:none;stroke-width:0.9375;enable-background:new;"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375;enable-background:new"
        x="793.69446"
        y="-159.25603"
        id="text1213-92"
@@ -255,10 +257,10 @@
          id="tspan1211-09"
          x="793.69446"
          y="-159.25603"
-         style="fill:#000000;fill-opacity:0.07843138;stroke-width:0.9375;">1 этаж</tspan></text>
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">1 этаж</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.07843138;stroke:none;stroke-width:0.9375;enable-background:new;"
+       style="font-style:normal;font-weight:normal;font-size:60px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.07843137;stroke:none;stroke-width:0.9375;enable-background:new"
        x="864.22363"
        y="92.161163"
        id="text1213-6"
@@ -267,16 +269,17 @@
          id="tspan1211-7"
          x="864.22363"
          y="92.161163"
-         style="fill:#000000;fill-opacity:0.07843138;stroke-width:0.9375;">1 этаж</tspan></text>
+         style="fill:#000000;fill-opacity:0.07843137;stroke-width:0.9375">1 этаж</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="base"
      style="display:inline"
-     transform="translate(-139.29151,0.33558001)">
+     transform="translate(-139.29151,0.33558001)"
+     sodipodi:insensitive="true">
     <path
-       style="display:inline;fill:#eabffb;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.72727275;stroke-dasharray:none;stroke-opacity:1"
+       style="display:inline;fill:#0066ff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.72727275;stroke-dasharray:none;stroke-opacity:1"
        d="m 364.46852,283.7219 -0.53033,108.5 h 30.5 v -7 h 87 v 40.5 h -185.5 v -40.5 h 6.5 v -89.5 h -16.5 v 14 h -89 v -14 h -16 v 90 h 6.5 v 41 H 6.4381855 v -41.5 h 5.5000005 v -141.5 h 25.499998 v 9 h 53.999997 v -109.5 H 37.438184 v 7.5 H 4.9381855 l 1,-149.0000061 H 51.938181 V 10.721895 H 123.43818 V 2.2218939 h 44.5 V 47.221895 h -44 v -6 H 43.438181 v 22.499997 h 9 V 101.2219 H 38.938184 v 7 H 147.93818 v 142 h 50.00001 v -24.5 h 63 V 88.721891 h 61 V 246.2219 h 293.5 v 37.5 l -76.29734,0.25 z"
        id="path4961-0"
        inkscape:connector-curvature="0"
@@ -309,7 +312,8 @@
      id="layer1"
      inkscape:label="walls1"
      style="display:inline"
-     transform="translate(-139.29151,0.33558001)">
+     transform="translate(-139.29151,0.33558001)"
+     sodipodi:insensitive="true">
     <path
        style="display:inline;fill:#fefdf6;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0"
        d="M 147.9388,184.44521 126.95117,184.622 V 123.22899 H 53.423358 v -15.14178 l 94.565282,-0.23943 z"
@@ -403,7 +407,7 @@
        id="path4359-1"
        inkscape:connector-curvature="0" />
     <path
-       style="display:inline;fill:#eabffb;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="display:inline;fill:#0066ff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 868.82029,158.36826 -0.0635,-0.4318 8.84259,-0.0255 c -8.8e-4,-3.07193 -0.12913,-7.08135 -0.132,-10.15328 l -11.1441,0.0625 0.0327,5.1875 -8.26958,0.0315 0.0322,5.28148 h -67.27046 l -0.0812,112.6021 h 20.03578 v 1.57737 h -20.2004 v 17.24988 h 28.95972 l -0.0602,-0.84953 V 271.0023 h 48.49542 v 26.74542 l -6.52753,0.0529 0.0299,8.19937 h -30.0625 v 14.8125 h 29.00001 v 30.75 h 34 l -0.065,-62.88454 -0.065,-17.65998 187.91456,-0.25098 -0.084,-24.94546 -115.33294,0.33666 -16.59717,-0.0225 v -1.2569 h 16.99518 l -0.0793,-0.0901 v -17.62881 h -21.31072 l -0.0864,-68.90578 z"
        id="path3341"
        inkscape:connector-curvature="0"
@@ -445,7 +449,7 @@
        id="path4454-2"
        inkscape:connector-curvature="0" />
     <path
-       style="display:inline;opacity:1;fill:#eabffb;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="display:inline;opacity:1;fill:#0066ff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 802.8081,334.24537 v 24.83503 h 10.0044 l -0.0669,20.7981 H 525.15417 l -0.0285,-20.93136 h 7.88912 l -0.0442,-26.65763 11.6277,0.0318 0.0442,26.64521 h 247.02076 v -24.71436 z"
        id="path8707"
        inkscape:connector-curvature="0"
@@ -534,7 +538,7 @@
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccccccccccccc" />
     <path
-       style="display:inline;opacity:1;fill:#d1ead6;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:3.2288487;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.72727275;stroke-dasharray:none;stroke-opacity:0;enable-background:new"
+       style="display:inline;opacity:1;fill:#0066ff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:3.2288487;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.72727275;stroke-dasharray:none;stroke-opacity:0;enable-background:new"
        d="m 57.4375,298 h 70.74833 v 90.12941 H 57.4375 Z"
        id="path4963"
        inkscape:connector-curvature="0"
