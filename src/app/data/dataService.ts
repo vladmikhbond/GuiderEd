@@ -165,6 +165,9 @@ export class DataService {
     //////////////////////// data //////////////////////
 
     exportData() {
+        ////////////////////////
+        this.justifyPoints();
+        ////////////////////////
         let ps = this.points.map(p => [p.x, p.y, p.z] );
         // with removing all whitespaces after comma
         let ts = this.points.map(p => p.tags.replace(/,\s+/g, ',') );
@@ -196,5 +199,28 @@ export class DataService {
             this.selPoint = ps[0];
         }
     }
+
+    justifyPoints() {
+        const EPS = EPSILON;
+        const xs = [20, 42, 120, 158, 241, 304, 349, 570, 847, 864, 934, 996, 1005];
+        const ys = [19, 179, 191, 277, 292, 344, 395, 425, 435];
+
+        xs.forEach( x => col(x, this.points));
+        ys.forEach( y => row(y, this.points));
+
+        function col(x: number, points: Point[]) {
+            for (let p of points) {
+                if (Math.abs(p.x - x) <= EPS)
+                    p.x = x;
+            }
+        }
+        function row(y: number, points: Point[]) {
+            for (let p of points) {
+                if (Math.abs(p.y - y) <= EPS)
+                    p.y = y;
+            }
+        }
+    }
+
 }
 
