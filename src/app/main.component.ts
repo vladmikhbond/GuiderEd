@@ -5,6 +5,7 @@ import {DashComponent} from './dash.component';
 
 const DASH_HEIGHT = 50;
 const INFO_HEIGHT = 30;
+const SEL_COLOR = "yellow";
 /*******************************************************************************
  *
  * Properties:
@@ -126,7 +127,7 @@ export class MainComponent
         // draw selected point
         let selP = this.service.selPoint;
         if (selP && selP.z == flid) {
-            ctx.strokeStyle = 'red';
+            ctx.strokeStyle = SEL_COLOR;
             ctx.lineWidth = 1;
             ctx.strokeRect(
                 (selP.x - 2) * scl,
@@ -135,7 +136,7 @@ export class MainComponent
         // draw selected edge
         let selE = this.service.selEdge;
         if (selE && selE.a.z == flid) {
-            ctx.strokeStyle = 'red';
+            ctx.strokeStyle = SEL_COLOR ;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(selE.a.x * scl, selE.a.y * scl);
